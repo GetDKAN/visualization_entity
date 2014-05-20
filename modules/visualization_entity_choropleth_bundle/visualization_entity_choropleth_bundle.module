@@ -1,0 +1,54 @@
+<?php
+/**
+ * @file
+ * Code for the Visualization Entity Choropleth Bundle feature.
+ */
+
+include_once 'visualization_entity_choropleth_bundle.features.inc';
+include_once 'includes/visualization_entity.choropleth_bundle.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function visualization_entity_choropleth_bundle_theme($existing, $type, $theme, $path) {
+  return array(
+    'visualization-entity-choropleth-color-scale-option' => array(
+      'variables' => array(),
+      'template' => 'choropleth-color-scale-option',
+      'path' => drupal_get_path('module', 'choropleth') . '/templates/',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function visualization_entity_choropleth_bundle_field_widget_form_alter(&$element, &$form_state, $context) {
+  $field = $context['field'];
+  if (isset($field['bundles']) && isset($field['bundles']['visualization'])) {
+    switch ($field['field_name']) {
+      case 'field_data_column':
+        $element['value']['#description'] = t('If there are multiple possible columns to map the data by, specify the name of the column in the uploaded data which should determine colors of states on a state-by-state map. (When there are multiple possible columns and no one column is specified, users will be prompted to select from radio buttons.)');
+        break;
+
+      case 'field_data_breakpoints':
+        $element['value']['#description'] = t('Determine what values will be used as "breakpoints" for color shading. Enter breakpoints as a comma separated list. For example, if you want your map to include 4 colors where 0-24 is visualized as the lightest color, 25-49 medium light, 50-74 dark, 75-100 darkest, you would enter this: 25, 50, 75..');
+        break;
+
+      case 'field_color_scale':
+        $color_scale = isset($element['value']['#default_value']) ? $element['value']['#default_value'] : FALSE;
+        $color_scale_options = visualization_entity_choropleth_bundle_color_scale_tableselect_options();
+        $element['#title'] = 'Color Scale';
+        $element['#description'] = t('Select desired color scale for the map polygons.');
+        $element['#type'] = 'fieldset';
+        $element['value']['#type'] = 'tableselect';
+        $element['value']['#header'] = array(
+          'colors' => t('Colors'),
+        );
+        $element['value']['#multiple'] = FALSE;
+        $element['value']['#default_value'] = $color_scale;
+        $element['value']['#options'] = $color_scale_options;
+        break;
+    }
+  }
+}

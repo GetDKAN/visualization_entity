@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Nudata Visualization Entity feature.
+ */
+
+include_once 'visualization_entity.features.inc';

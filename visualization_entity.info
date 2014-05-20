@@ -1,0 +1,13 @@
+name = Visualization Entity
+core = 7.x
+package = NUDATA
+dependencies[] = eck
+dependencies[] = eck
+dependencies[] = features
+dependencies[] = geo_file_entity
+dependencies[] = geo_file_entity_geojson_bundle
+dependencies[] = og
+dependencies[] = options
+features[eck_entity_type][] = visualization
+features[features_api][] = api:2
+project path = sites/all/modules/nudata
