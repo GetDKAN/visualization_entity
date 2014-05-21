@@ -4,6 +4,7 @@ package = NUDATA
 dependencies[] = eck
 dependencies[] = eck
 dependencies[] = features
+dependencies[] = libraries
 dependencies[] = geo_file_entity
 dependencies[] = geo_file_entity_geojson_bundle
 dependencies[] = og
