@@ -20,6 +20,13 @@ function visualization_entity_choropleth_bundle_menu() {
   );
 }
 
+/**
+ * Renders iframe view for choropleth visualization
+ * @param int $entity_id
+ *   The Entity id to load
+ * @return string
+ *   A rendered entity or MENU_NOT_FOUND constant
+ */
 function visualization_entity_choropleth_bundle_iframe($entity_id) {
   $entity = entity_load_single(
     'visualization',
@@ -190,93 +197,91 @@ function visualization_entity_choropleth_bundle_theme($existing, $type, $theme, 
  * Implements hook_entity_view_alter().
  */
 function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type) {
-  if ($type === 'visualization') {
-    switch ($build['#view_mode']) {
-      case 'full':
-        // Load libraries.
-        libraries_load('recline');
-        libraries_load('numeral');
-        libraries_load('chroma');
-        libraries_load('recline_choropleth');
-        libraries_load('recline_choropleth_dataset');
+  if ($type === 'visualization' && $build['#entity']->type === 'choropleth_visualization') {    
+    // Load libraries.
+    libraries_load('recline');
+    libraries_load('numeral');
+    libraries_load('chroma');
+    libraries_load('recline_choropleth');
+    libraries_load('recline_choropleth_dataset');
 
-        // Build settings.
-        $settings = array();
+    // Build settings.
+    $settings = array();
 
-        // Build color scale settings.
-        if (isset($build['field_color_scale'])) {
-          $color_scale_settings = visualization_entity_choropleth_bundle_color_scale_settings();
-          $color_scale = (int) $build['field_color_scale']['#items'][0]['value'];
-          $color_scale_settings = $color_scale_settings[$color_scale];
-          $settings['colors'] = $color_scale_settings;
-        }
-
-        // Build breakpoints.
-        if (isset($build['field_data_breakpoints'])) {
-          $breakpoints = $build['field_data_breakpoints']['#items'][0]['value'];
-          $breakpoints = explode(',', $breakpoints);
-          $settings['breakpoints'] = $breakpoints;
-        }
-
-        // Build data_column.
-        if (isset($build['field_data_column'])) {
-          $settings['data_column'] = $build['field_data_column']['#items'][0]['value'];
-        }
-        
-        // Build resources files.
-        $nids = array();
-        $resources = $build['field_resource']['#items'];
-        foreach($resources as $key => $resource) {
-          array_push($nids, $resources[$key]['target_id']);
-        }
-        $resources = node_load_multiple($nids);
-        $settings['resources'] = array();
-        foreach($resources as $key => $resource) {
-          $title = $resource->title;
-          $delimiter = $resource->field_upload[LANGUAGE_NONE][0]['delimiter'];
-          $delimiter = $delimiter !== NULL ? $delimiter : ',';
-          $average = $build['field_average_multiple_rows']['#items'][0]['value'] === 1 ? TRUE : FALSE;
-          $resource = $resource->field_upload[LANGUAGE_NONE][0]['uri'];
-          $resource = drupal_realpath($resource);
-          $resource = file_get_contents($resource);
-          array_push(
-            $settings['resources'],
-            array(
-              'title' => $title,
-              'delimiter' => $delimiter,
-              'dataset' => $resource,
-              'map' => FALSE,
-              'avg' => $average,
-            )
-          );
-        }
-
-        // Build label column and geojson file.        
-        $geojson = entity_load_single(
-          'geo_file',
-          $build['field_geojson']['#items'][0]['target_id']
-        );
-        $settings['label_column'] = $geojson->field_name_attribute[LANGUAGE_NONE][0]['value'];
-
-        $geojson = $geojson->field_file[LANGUAGE_NONE][0]['uri'];
-        $geojson = drupal_realpath($geojson);
-        $geojson = json_decode(file_get_contents($geojson));
-        $settings['geojson'] = $geojson;
-
-        $settings = array(
-          'visualization_choropleth' => $settings,
-        );
-
-        // Add settings.
-        drupal_add_js($settings, 'setting');
-
-        // Add js controller and stylesheets.
-        $module_path = drupal_get_path('module', 'visualization_entity_choropleth_bundle');
-        drupal_add_js($module_path . '/visualization_entity_choropleth_bundle.js');
-
-        break;
-
+    // Build color scale settings.
+    if (isset($build['field_color_scale'])) {
+      $color_scale_settings = visualization_entity_choropleth_bundle_color_scale_settings();
+      $color_scale = (int) $build['field_color_scale']['#items'][0]['value'];
+      $color_scale_settings = $color_scale_settings[$color_scale];
+      $settings['colors'] = $color_scale_settings;
     }
+
+    // Build breakpoints.
+    if (isset($build['field_data_breakpoints'])) {
+      $breakpoints = $build['field_data_breakpoints']['#items'][0]['value'];
+      $breakpoints = explode(',', $breakpoints);
+      $settings['breakpoints'] = $breakpoints;
+    }
+
+    // Build data_column.
+    if (isset($build['field_data_column'])) {
+      $settings['data_column'] = $build['field_data_column']['#items'][0]['value'];
+    }
+    
+    // Build resources files.
+    $nids = array();
+    $resources = $build['field_resource']['#items'];
+    foreach($resources as $key => $resource) {
+      array_push($nids, $resources[$key]['target_id']);
+    }
+    $resources = node_load_multiple($nids);
+
+    $average = $build['field_average_multiple_rows']['#items'][0]['value'] === 1 ? TRUE : FALSE;
+
+    $unit_of_measure = isset($build['field_data_units']) ? $build['field_data_units']['#items'][0]['value'] : '';
+    $settings['resources'] = array();
+    foreach($resources as $key => $resource) {
+      $title = $resource->title;
+      $delimiter = $resource->field_upload[LANGUAGE_NONE][0]['delimiter'];
+      $delimiter = $delimiter !== NULL ? $delimiter : ',';  
+      $resource = $resource->field_upload[LANGUAGE_NONE][0]['uri'];
+      $resource = drupal_realpath($resource);
+      $resource = file_get_contents($resource);
+      array_push(
+        $settings['resources'],
+        array(
+          'title' => $title,
+          'delimiter' => $delimiter,
+          'dataset' => $resource,
+          'map' => FALSE,
+          'avg' => $average,
+          'unitOfMeasure' => $unit_of_measure,
+        )
+      );
+    }
+
+    // Build label column and geojson file.        
+    $geojson = entity_load_single(
+      'geo_file',
+      $build['field_geojson']['#items'][0]['target_id']
+    );
+    $settings['label_column'] = $geojson->field_name_attribute[LANGUAGE_NONE][0]['value'];
+
+    $geojson = $geojson->field_file[LANGUAGE_NONE][0]['uri'];
+    $geojson = drupal_realpath($geojson);
+    $geojson = json_decode(file_get_contents($geojson));
+    $settings['geojson'] = $geojson;
+
+    $settings = array(
+      'visualization_choropleth' => $settings,
+    );
+
+    // Add settings.
+    drupal_add_js($settings, 'setting');
+
+    // Add js controller and stylesheets.
+    $module_path = drupal_get_path('module', 'visualization_entity_choropleth_bundle');
+    drupal_add_js($module_path . '/visualization_entity_choropleth_bundle.js');
   }
 }
 /**
