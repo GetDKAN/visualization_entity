@@ -10,6 +10,49 @@
 function visualization_entity_choropleth_bundle_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'visualization-choropleth_visualization-field_average_multiple_rows'
+  $field_instances['visualization-choropleth_visualization-field_average_multiple_rows'] = array(
+    'bundle' => 'choropleth_visualization',
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'visualization',
+    'field_name' => 'field_average_multiple_rows',
+    'label' => 'average multiple rows',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'visualization-choropleth_visualization-field_color_scale'
   $field_instances['visualization-choropleth_visualization-field_color_scale'] = array(
     'bundle' => 'choropleth_visualization',
@@ -22,10 +65,10 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
+        'module' => 'visualization_entity_choropleth_bundle',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'choropleth_color_scale',
         'weight' => 4,
       ),
       'teaser' => array(
@@ -50,7 +93,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 2,
     ),
   );
 
@@ -62,10 +105,10 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'text_plain',
         'weight' => 3,
       ),
       'teaser' => array(
@@ -90,7 +133,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 5,
     ),
   );
 
@@ -102,10 +145,10 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'text_plain',
         'weight' => 2,
       ),
       'teaser' => array(
@@ -130,7 +173,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 4,
     ),
   );
 
@@ -142,13 +185,14 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'links' => 1,
+          'view_mode' => 'teaser',
         ),
-        'type' => 'entityreference_label',
-        'weight' => 0,
+        'type' => 'entityreference_entity_view',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -183,12 +227,13 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'links' => 1,
+          'view_mode' => 'teaser',
         ),
-        'type' => 'entityreference_label',
+        'type' => 'entityreference_entity_view',
         'weight' => 1,
       ),
       'teaser' => array(
@@ -212,12 +257,13 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'apply_chosen' => 0,
       ),
       'type' => 'options_select',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('average multiple rows');
   t('color scale');
   t('data breakpoints');
   t('data column');
