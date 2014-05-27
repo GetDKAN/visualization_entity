@@ -32,8 +32,8 @@
   <div class="content">
     <table class="table table-responsive">
       <tr>
-        <th>Field</th>
-        <th>Value</th>
+        <th><?php print t('Field'); ?></th>
+        <th><?php print t('Value'); ?></th>
       </tr>
       <?php foreach($content as $key => $data):?>
       <?php if ($key!='title'):?>

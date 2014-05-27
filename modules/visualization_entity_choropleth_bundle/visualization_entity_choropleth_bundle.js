@@ -9,31 +9,6 @@
       var color_scale = settings.colors || ['#FFEDA0', '#FEB24C', '#E31A1C', '#800026'];
       var breakpoints = settings.breakpoints ? settings.breakpoints : [];
 
-      var layers = new L.GeoJSON(geojson);
-      layers = layers._layers;
-      var bounds = new L.LatLngBounds();
-      for (var layer in layers) {
-        if (layers.hasOwnProperty(layer)){
-          var feature = layers[layer].feature;
-          for ( var j = 1; j < feature.geometry.coordinates[0].length; j++ ) {
-            var latlng = feature.geometry.coordinates[0][j];
-            latlng = new L.LatLng(latlng[1],latlng[0]);
-            bounds.extend(latlng);
-          }
-        }
-      }
-      // console.log(bounds);
-      bounds = {
-        northeast: bounds.getNorthEast(),
-        southwest: bounds.getSouthWest(),
-      };
-      bounds = {
-        top: bounds.northeast.lat,
-        bottom: bounds.southwest.lat,
-        left: bounds.southwest.lng,
-        right: bounds.northeast.lng
-      };
-
       var view = {};
       if (resources.length === 1) {
         // Process resource and create recline model instance.s
@@ -50,8 +25,8 @@
           selectable_fields: data_column,
           breakpoints: breakpoints,
           base_color: color_scale,
-          bounds: bounds,
           avg: resources[0].avg,
+          unitOfMeasure: resources[0].unitOfMeasure,
         });
       }
       else {
@@ -76,7 +51,6 @@
           selectable_fields: data_column,
           label_to_map: label_column,
           base_color: color_scale,
-          bounds: bounds,
         });
       }
       // Attach html and render the Recline view.
