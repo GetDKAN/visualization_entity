@@ -1,0 +1,14 @@
+name = Visualization Entity Multi Choropleth Bundle
+core = 7.x
+package = NUDATA
+dependencies[] = eck
+dependencies[] = entityreference
+dependencies[] = features
+dependencies[] = visualization_entity
+dependencies[] = visualization_entity_choropleth_bundle
+features[eck_bundle][] = visualization_multi_choropleth_visualization
+features[features_api][] = api:2
+features[field_base][] = field_visualizations
+features[field_instance][] = visualization-multi_choropleth_visualization-field_visualizations
+features[user_permission][] = eck view visualization multi_choropleth_visualization entities
+project path = sites/all/modules/nudata/visualization_entity/modules

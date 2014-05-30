@@ -1,0 +1,139 @@
+<?php
+/**
+ * @file
+ * Code for the Visualization Entity Multi Choropleth Bundle feature.
+ */
+
+include_once 'visualization_entity_multi_choropleth_bundle.features.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function visualization_entity_multi_choropleth_bundle_menu() {
+  return array(
+    'visualization/multi_choropleth_visualization/%/iframe' => array(
+      'title' => 'Choropleth Vizualization',
+      'page callback' => 'visualization_entity_choropleth_bundle_iframe',
+      'page arguments' => array(2),
+      'access arguments' => array('eck view visualization multi_choropleth_visualization entities'),
+    )
+  );
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function visualization_entity_multi_choropleth_bundle_preprocess_page(&$vars) {
+  if (in_array('page__visualization__multi_choropleth_visualization__iframe', $vars['theme_hook_suggestions'])) {
+    $vars['theme_hook_suggestions'][] = 'visualization-choropleth-iframe';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function visualization_entity_multi_choropleth_bundle_theme($existing, $type, $theme, $path) {
+  $tpls_path = drupal_get_path('module', 'visualization_entity_choropleth_bundle') . '/theme';
+  return array(
+    'visualization__multi_choropleth_visualization' => array(
+      'render element' => 'elements',
+      'template' => 'visualization--choropleth',
+      'path' => $tpls_path,
+    ),
+  );
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function visualization_entity_multi_choropleth_bundle_entity_view_alter(&$build, $type) {
+  if ($type === 'visualization' && $build['#entity']->type === 'multi_choropleth_visualization') {    
+    // Load libraries.
+    libraries_load('recline');
+    libraries_load('numeral');
+    libraries_load('chroma');
+    libraries_load('recline_choropleth');
+    libraries_load('recline_choropleth_dataset');
+
+    $visualizations = array();
+    foreach ($build['field_visualizations']['#items'] as $visualization) {
+      array_push($visualizations, $visualization['entity']);
+    }
+
+    // Build settings.
+    $settings = array(
+      'visualizations' => array(),
+    );
+
+    foreach ($visualizations as $visualization) {
+      $visualization_settings = array();
+      // Build color scale settings.
+      if (count($visualization->field_color_scale) > 0) {
+        $color_scale_settings = visualization_entity_choropleth_bundle_color_scale_settings();
+        $color_scale = (int) $visualization->field_color_scale[LANGUAGE_NONE][0]['value'];
+        $color_scale_settings = $color_scale_settings[$color_scale];
+        $visualization_settings['colors'] = $color_scale_settings;
+      }
+
+      // Build breakpoints.
+      if (count($visualization->field_data_breakpoints) > 0) {
+        $breakpoints = $visualization->field_data_breakpoints[LANGUAGE_NONE][0]['value'];
+        $breakpoints = explode(',', $breakpoints);
+        $visualization_settings['breakpoints'] = $breakpoints;
+      }
+
+      // Build data_column.
+      if (count($visualization->field_data_column) > 0) {
+        $visualization_settings['data_column'] = $visualization->field_data_column[LANGUAGE_NONE][0]['value'];
+      }
+
+      // Build average_multiple_rows.
+      if (count($visualization->field_average_multiple_rows) > 0) {
+        $visualization_settings['avg'] = $visualization->field_average_multiple_rows[LANGUAGE_NONE][0]['value'];
+        $visualization_settings['avg'] = $visualization_settings['avg'] === 1 ? TRUE : FALSE;
+      }
+
+      // Build resource file.
+      $nids = array();
+      $resource = $visualization->field_resource[LANGUAGE_NONE][0]['target_id'];
+      $resource = node_load($resource);
+
+      $delimiter = $resource->field_upload[LANGUAGE_NONE][0]['delimiter'];
+      $visualization_settings['delimiter'] = $delimiter !== NULL ? $delimiter : ',';
+
+      $visualization_settings['title'] = $resource->title;
+
+      $file = $resource->field_upload[LANGUAGE_NONE][0]['uri'];
+      $file = drupal_realpath($file);
+      $file = file_get_contents($file);
+
+      $visualization_settings['dataset'] = $file;
+
+      $visualization_settings['map'] = FALSE;
+
+      $geojson = $visualization->field_geojson[LANGUAGE_NONE][0]['target_id'];
+      $geojson = entity_load_single(
+        'geo_file',
+        $geojson
+      );
+      $visualization_settings['label_column'] = $geojson->field_name_attribute[LANGUAGE_NONE][0]['value'];
+      $geojson = $geojson->field_file[LANGUAGE_NONE][0]['uri'];
+      $geojson = drupal_realpath($geojson);
+      $geojson = json_decode($geojson);
+      $visualization_settings['polygons'] = $geojson;
+
+      array_push(
+        $settings['visualizations'],
+        $visualization_settings
+      );
+    }
+
+    $settings['visualization_multi_choropleth'] = $settings;
+    // Add settings.
+    drupal_add_js($settings, 'setting');
+
+    // Add js controller and stylesheets.
+    $module_path = drupal_get_path('module', 'visualization_entity_multi_choropleth_bundle');
+    drupal_add_js($module_path . '/visualization_entity_multi_choropleth_bundle.js');
+  }
+}
