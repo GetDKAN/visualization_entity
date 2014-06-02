@@ -22,11 +22,11 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 5,
+        'type' => 'list_key',
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -69,7 +69,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'module' => 'visualization_entity_choropleth_bundle',
         'settings' => array(),
         'type' => 'choropleth_color_scale',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -109,7 +109,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -149,7 +149,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 2,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -174,6 +174,46 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
       ),
       'type' => 'text_textfield',
       'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'visualization-choropleth_visualization-field_data_units'
+  $field_instances['visualization-choropleth_visualization-field_data_units'] = array(
+    'bundle' => 'choropleth_visualization',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'visualization',
+    'field_name' => 'field_data_units',
+    'label' => 'data units',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 6,
     ),
   );
 
@@ -234,7 +274,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -267,6 +307,7 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
   t('color scale');
   t('data breakpoints');
   t('data column');
+  t('data units');
   t('geojson');
   t('resource');
 

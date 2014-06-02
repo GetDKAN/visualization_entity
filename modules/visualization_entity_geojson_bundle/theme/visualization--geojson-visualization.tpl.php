@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Custom theme implementation for Choropleth Visualization Entity Bundle.
+ * Custom theme implementation for Geojson Geofile Entity Bundle.
  *
  * Available variables:
  * - $content: An array of comment items. Use render($content) to print them all, or
@@ -45,8 +45,6 @@
       <?php endforeach;?>
     </table>
   </div>
-  <div id="visualization" class="recline-data-explorer">
-    <div class='data-view-sidebar'></div>
-    <div class='data-view-container'></div>
+  <div id="visualization">
   </div>
 </div>
