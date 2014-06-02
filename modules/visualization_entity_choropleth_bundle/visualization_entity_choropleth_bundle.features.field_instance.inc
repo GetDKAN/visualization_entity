@@ -228,10 +228,9 @@ function visualization_entity_choropleth_bundle_field_default_field_instances() 
         'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
-          'links' => 1,
-          'view_mode' => 'teaser',
+          'link' => 1,
         ),
-        'type' => 'entityreference_entity_view',
+        'type' => 'entityreference_label',
         'weight' => 1,
       ),
       'teaser' => array(
