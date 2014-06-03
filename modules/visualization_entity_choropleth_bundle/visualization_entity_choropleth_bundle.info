@@ -10,6 +10,7 @@ dependencies[] = list
 dependencies[] = options
 dependencies[] = recline
 dependencies[] = text
+dependencies[] = geo_file_entity_geojson_bundle
 dependencies[] = visualization_entity
 features[eck_bundle][] = visualization_choropleth_visualization
 features[features_api][] = api:2
