@@ -38,3 +38,20 @@ function visualization_entity_eck_entity_type_info() {
   );
   return $items;
 }
+
+/**
+ * Implements hook_context_default_contexts_alter().
+ */
+function visualization_entity_context_default_contexts_alter(&$data) {
+  if (isset($data['resource'])) {
+    $data['resource']->reactions['block']['blocks']['dkan_dataset-dkan_dataset_resource_nodes']['weight'] = -9; /* WAS: -10 */
+    $data['resource']->reactions['block']['blocks']['dkan_sitewide-dkan_sitewide_resource_add']['weight'] = -9; /* WAS: -10 */
+    $data['resource']->reactions['block']['blocks']['dkan_sitewide-dkan_sitewide_social']['weight'] = -8; /* WAS: -9 */
+    $data['resource']->reactions['block']['blocks']['views-resource_visualizations-block'] = array(
+      'module' => 'views',
+      'delta' => 'resource_visualizations-block',
+      'region' => 'content',
+      'weight' => 10,
+    ); /* WAS: '' */
+  }
+}
