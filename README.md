@@ -1,16 +1,5 @@
 # Visualization Entity
 
-An entity to hold visualization configuration for dkan_dataset resources.
+![](https://raw.githubusercontent.com/wiki/NuCivic/visualization_entity/images/choropleth.png)
 
-```bash
-drush make --no-core visualization_entity.make
-drush -y en visualization_entity
-```
-
-## Choropleth bundle
-
-A bundle for the visualization_entity to add the ability to have choropleth representations for dkan dataset resources
-
-```bash
-drush -y en visualization_entity_geojson_bundle
-```
+For documentation please see [the wiki](https://github.com/NuCivic/visualization_entity/wiki)

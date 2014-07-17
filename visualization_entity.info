@@ -1,6 +1,7 @@
 name = Visualization Entity
 core = 7.x
 package = NUDATA
+
 dependencies[] = eck
 dependencies[] = eck
 dependencies[] = entityreference
@@ -10,9 +11,9 @@ dependencies[] = geo_file_entity_geojson_bundle
 dependencies[] = libraries
 dependencies[] = og
 dependencies[] = options
-dependencies[] = visualization_entity_choropleth_bundle
+
 features[eck_entity_type][] = visualization
 features[features_api][] = api:2
 features[field_base][] = field_resource
 features_exclude[dependencies][entityreference] = entityreference
-project path = sites/all/modules/nudata
+project path = sites/all/modules/nucivic
