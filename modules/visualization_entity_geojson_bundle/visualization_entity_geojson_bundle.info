@@ -1,6 +1,7 @@
 name = Visualization Entity Geojson Bundle
 core = 7.x
-package = NUDATA
+package = NUCIVIC
+
 dependencies[] = eck
 dependencies[] = entityreference
 dependencies[] = features
@@ -10,4 +11,5 @@ features[eck_bundle][] = visualization_geojson_visualization
 features[features_api][] = api:2
 features[field_instance][] = visualization-geojson_visualization-field_resource
 features_exclude[field_base][field_resource] = field_resource
-project path = sites/all/modules/nudata/visualization_entity/modules
+
+project path = sites/all/modules/nucivic/visualization_entity/modules
