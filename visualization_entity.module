@@ -33,9 +33,35 @@ function visualization_entity_theme($existing, $type, $theme, $path) {
       'template' => 'visualization-iframe',
       'path' => $tpls_path,
     ),
+    'visualization-embed-button' => array(
+      'variables' => array('embed_url' => NULL),
+      'template' => 'visualization-embed-button',
+      'path' => $tpls_path,
+    ),
   );
 }
 
+/**
+ * Implements hook_entity_view_alter().
+ */
+function visualization_entity_entity_view_alter(&$build, $type) {
+  if ($type === 'visualization' && $build['#view_mode'] === 'full') {
+    $build['#post_render'][] = 'visualization_entity_attach_embed_widget';
+  }
+}
+
+function visualization_entity_attach_embed_widget($markup, $element) {
+  $module_path = drupal_get_path('module', 'visualization_entity');
+  $embed_url = current_path();
+  if (!is_numeric(strpos($embed_url, '/iframe'))) {
+    $embed_url =  $embed_url . '/iframe';
+    $embed_url = url($embed_url, array('absolute' => TRUE));
+    $embed_button = theme('visualization-embed-button', array('embed_url' => $embed_url));
+    $markup .= $embed_button;
+    drupal_add_js($module_path . '/visualization_entity.js');
+  }
+  return $markup;
+}
 /**
  * Renders iframe view for choropleth visualization
  * @param int $entity_id
