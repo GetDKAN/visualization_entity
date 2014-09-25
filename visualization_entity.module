@@ -15,7 +15,7 @@ function visualization_entity_menu() {
       'title' => 'Choropleth Vizualization',
       'page callback' => 'visualization_entity_iframe',
       'page arguments' => array(2),
-      'access arguments' => array(),
+      'access arguments' => array('access content'),
     )
   );
 }
