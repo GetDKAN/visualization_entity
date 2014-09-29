@@ -2,7 +2,6 @@
   Drupal.behaviors.visualization_entity_geojson_bundle = {
     attach: function(context) {
       var settings = Drupal.settings.visualization_entity_geojson_bundle;
-      
 
       var div = $('#visualization');
       var map = new L.map(div.get(0)).setView([37.8, -96], 4);
