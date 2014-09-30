@@ -52,3 +52,14 @@ function visualization_entity_geojson_bundle_entity_view_alter(&$build, $type) {
     drupal_add_css($module_path . '/visualization_entity_geojson_bundle.css');
   }
 }
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function visualization_entity_geojson_bundle_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'eck__entity__form_add_visualization_geojson_visualization' || $form_id == 'eck__entity__form_edit_visualization_geojson_visualization') {
+
+    $options_resources = $form['field_resource'][LANGUAGE_NONE]['#options'];
+    $form['field_resource'][LANGUAGE_NONE]['#options'] = visualization_entity_filter_array_by_key($options_resources, 'visualization_entity_validate_file', array('node', 'field_upload', 'visualization_entity_is_geojson'));
+  }
+}
