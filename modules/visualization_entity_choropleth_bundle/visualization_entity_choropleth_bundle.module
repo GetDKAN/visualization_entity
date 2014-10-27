@@ -172,6 +172,21 @@ function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type
       $settings['breakpoints'] = $breakpoints;
     }
 
+    // Build geojson_key.
+    if (isset($build['field_ve_geojson_key'])) {
+      $settings['geojson_key'] = $build['field_ve_geojson_key']['#items'][0]['value'];
+    }
+
+    // Build geojson_label.
+    if (isset($build['field_ve_geojson_label'])) {
+      $settings['geojson_label'] = $build['field_ve_geojson_label']['#items'][0]['value'];
+    }
+
+    // Build geojson_label.
+    if (isset($build['field_ve_map_column'])) {
+      $settings['map_column'] = $build['field_ve_map_column']['#items'][0]['value'];
+    }
+
     // Build data_column.
     if (isset($build['field_data_column'])) {
       $settings['data_column'] = $build['field_data_column']['#items'][0]['value'];
@@ -214,7 +229,6 @@ function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type
       'geo_file',
       $build['field_geojson']['#items'][0]['target_id']
     );
-    $settings['label_column'] = $geojson->field_name_attribute[LANGUAGE_NONE][0]['value'];
 
     $geojson = $geojson->field_file[LANGUAGE_NONE][0]['uri'];
     $geojson = drupal_realpath($geojson);
