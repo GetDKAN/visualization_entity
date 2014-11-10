@@ -213,7 +213,7 @@ function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type
     }
     $resources = node_load_multiple($nids);
 
-    $average = $build['field_average_multiple_rows']['#items'][0]['value'] === 1 ? TRUE : FALSE;
+    $average = $build['field_average_multiple_rows']['#items'][0]['value'] == 1 ? TRUE : FALSE;
 
     $unit_of_measure = isset($build['field_data_units']) ? $build['field_data_units']['#items'][0]['value'] : '';
     $settings['resources'] = array();
