@@ -366,15 +366,6 @@ function visualization_entity_choropleth_bundle_form_validate(&$form, &$form_sta
   $node = node_load($resource_id);
   $field_upload = $node->field_upload[LANGUAGE_NONE][0];
 
-  $geojson_id = $form_state['values']['field_geojson'][LANGUAGE_NONE][0]['target_id'];
-  $geojson = entity_load_single('geo_file', $geojson_id);
-
-  $name_attribute = $geojson->field_name_attribute[LANGUAGE_NONE][0]['value'];
-  $resource_columns = visualization_entity_csv_columns($field_upload);
-  // Name attribute must match a column name of resource.
-  if (!empty($name_attribute) && !in_array(strtolower($name_attribute), $resource_columns)) {
-    form_set_error('field_data_column', 'Name attribute must match a column name of resource.');
-  }
   // Data column must be a valid field in the csv file.
   if (!visualization_entity_choropleth_bundle_has_data_column($data_column, $field_upload)) {
     form_set_error('field_data_column', 'Data column must be a valid field in the csv file.');
