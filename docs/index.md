@@ -12,11 +12,11 @@ The two bundles provided with this module are the **geojson** and **choropleth**
 
 ## Geojson Bundle
 
-![](https://raw.githubusercontent.com/wiki/NuCivic/visualization_entity/images/geojson.png)
+![](images/geojson.png)
 
 ## Choropleth Bundle
 
-![](https://raw.githubusercontent.com/wiki/NuCivic/visualization_entity/images/choropleth.png)
+![](images/choropleth.png)
 
 ## Further Work and Collaboration
 
