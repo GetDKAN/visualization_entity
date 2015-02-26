@@ -38,7 +38,7 @@ drush -y en visualization_entity_geojson_bundle
 
 #### Choropleth Bundle
 
-![](https://raw.githubusercontent.com/wiki/NuCivic/visualization_entity/images/choropleth.png)
+![](images/choropleth.png)
 
 ```bash
 drush -y en visualization_entity_choropleth_bundle
