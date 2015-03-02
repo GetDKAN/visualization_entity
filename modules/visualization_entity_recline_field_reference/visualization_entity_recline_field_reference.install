@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Install procedures for visualization_entity.
+ * Install procedures for visualization_entity recline field reference.
  */
 
 /**
  * Update function to remove all instances of old field_resource.
  */
-function visualization_entity_update_7100() {
+function visualization_entity_recline_field_reference_update_7100() {
   // Retrieve field settings for field_resource.
   $field = field_read_field('field_resource');
   $target_type = $field['settings']['target_type'];
