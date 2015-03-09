@@ -4,6 +4,7 @@ Follow the [[installation instructions|Installation]] then make sure the choropl
 
 ```bash
 $ drush en -y visualization_entity_choropleth_bundle
+$ drush cc all
 ```
 
 ## Create Visualization

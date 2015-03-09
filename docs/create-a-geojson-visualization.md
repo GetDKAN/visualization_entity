@@ -4,6 +4,7 @@ Make sure the geojson bundle is enabled:
 
 ```bash
 $ drush -y visualization_entity_geojson_bundle
+$ drush cc all
 ```
 
 ## Create Visualization
