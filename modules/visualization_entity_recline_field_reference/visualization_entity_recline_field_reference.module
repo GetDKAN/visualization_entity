@@ -1,7 +1,13 @@
 <?php
+/**
+ * @file
+ * Code for visualization entity recline fields.
+ */
 
 /**
  * Provide a list of content types that implement the recline field.
+ *
+ *
  * @return array List of content types have a recline field.
  */
 

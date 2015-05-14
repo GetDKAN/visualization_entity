@@ -24,7 +24,6 @@
           resource = new recline.Model.Dataset({
             records: recline.Backend.CSV.parse(resource, resource.delimiter),
           });
-          console.log(resource);
           initView(resource);
         }
         else {
@@ -108,6 +107,10 @@
         container.append(view.el);
         sidebar.append(view.elSidebar);
         view.render();
+        $(window).on('resize', function(){
+          view.$el.find('.recline-map .map').height($(window).height() - 10);
+        });
+        view.$el.find('.recline-map .map').height($(window).height() - 10);
       }
       // Get page url from iteration number.
       function getPageURL(i, resource) {

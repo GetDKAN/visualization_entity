@@ -116,6 +116,11 @@ function visualization_entity_choropleth_bundle_libraries_info() {
 function visualization_entity_choropleth_bundle_theme($existing, $type, $theme, $path) {
   $tpls_path = drupal_get_path('module', 'visualization_entity_choropleth_bundle') . '/theme';
   return array(
+    'visualization__choropleth_embed' => array(
+      'variables' => array(),
+      'template' => 'visualization--choropleth-embed',
+      'path' => $tpls_path,
+    ),
     'visualization-entity-choropleth-color-scale-option' => array(
       'variables' => array(),
       'template' => 'choropleth-color-scale-option',
@@ -133,34 +138,78 @@ function visualization_entity_choropleth_bundle_theme($existing, $type, $theme, 
 }
 
 /**
+ * Load required libraries.
+ */
+function visualization_entity_choropleth_bundle_load_required_libraries() {
+  libraries_load('lodash');
+  libraries_load('backbone');
+  libraries_load('mustache');
+  libraries_load('csv');
+  libraries_load('recline');
+  libraries_load('leaflet');
+  libraries_load('leaflet_zoomtogeometries');
+  libraries_load('numeral');
+  libraries_load('chroma');
+  libraries_load('recline_choropleth');
+}
+
+/**
+ * Load a geojson file entity.
+ */
+function visualization_entity_choropleth_bundle_load_geojson($target_id) {
+  $geojson = entity_load_single('geo_file', $target_id);
+  $geojson_name_attribute = $geojson->field_name_attribute[LANGUAGE_NONE][0]['value'];
+  $geojson = $geojson->field_file[LANGUAGE_NONE][0]['uri'];
+  $geojson = drupal_realpath($geojson);
+  return json_decode(file_get_contents($geojson));
+}
+
+/**
+ * Creates renderable view for a visualization given a view mode.
+ */
+function visualization_entity_choropleth_bundle_render_map($visualization, $view_mode) {
+  if (!empty($visualization)) {
+    return entity_view('visualization', array($visualization), $view_mode);
+  }
+  else {
+    return MENU_NOT_FOUND;
+  }
+}
+
+function visualization_entity_choropleth_bundle_visualization_entity_embed_render_alter($vars) {
+  $visualization = $vars['visualization'];
+  if (!empty($visualization) && $visualization->type == 'choropleth_visualization' && $vars['conf']['local_source']) {
+    // TODO: In order to uncomment this code, visualization_entity_choropleth_map.js needs to
+    // be adapted to work with multiple viz intances at the same page.
+    // $entity_view = visualization_entity_choropleth_bundle_render_map($vars['visualization'], 'embed');
+    // $vars['block']->content = drupal_render($entity_view);
+  }
+}
+
+/**
+ * Implements hook_preprocess_entity().
+ */
+function visualization_entity_choropleth_bundle_preprocess_entity(&$vars) {
+  if ($vars['entity_type'] == 'visualization' && $vars['view_mode'] == 'embed') {
+    $vars['theme_hook_suggestions'] = array('visualization__choropleth_embed');
+  }
+}
+
+/**
  * Implements hook_entity_view_alter().
  */
 function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type) {
   if ($type === 'visualization' && $build['#entity']->type === 'choropleth_visualization') {
     // Load libraries.
-    libraries_load('lodash');
-    libraries_load('backbone');
-    libraries_load('mustache');
-    libraries_load('csv');
-    libraries_load('recline');
-    libraries_load('leaflet');
-    libraries_load('leaflet_zoomtogeometries');
-    libraries_load('numeral');
-    libraries_load('chroma');
-    libraries_load('recline_choropleth');
+    visualization_entity_choropleth_bundle_load_required_libraries();
 
     // Build settings.
     $settings = array();
 
+    $settings['eid'] = $build['#entity']->id;
+
     // Build geojson file.
-    $geojson = entity_load_single(
-      'geo_file',
-      $build['field_geojson']['#items'][0]['target_id']
-    );
-    $geojson_name_attribute = $geojson->field_name_attribute[LANGUAGE_NONE][0]['value'];
-    $geojson = $geojson->field_file[LANGUAGE_NONE][0]['uri'];
-    $geojson = drupal_realpath($geojson);
-    $geojson = json_decode(file_get_contents($geojson));
+    $geojson = visualization_entity_choropleth_bundle_load_geojson($build['field_geojson']['#items'][0]['target_id']);
 
     $settings['geojson'] = $geojson;
 
@@ -203,7 +252,6 @@ function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type
     else {
       $settings['map_column'] = $geojson_name_attribute;
     }
-
 
     // Build data_column.
     if (isset($build['field_data_column'])) {
