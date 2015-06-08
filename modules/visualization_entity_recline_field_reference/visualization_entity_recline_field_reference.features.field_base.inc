@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * visualization_entity.features.field_base.inc
+ * visualization_entity_recline_field_reference.features.field_base.inc
  */
 
 /**
@@ -31,7 +31,7 @@ function visualization_entity_recline_field_reference_field_default_field_bases(
         'dataset' => 0,
         'group' => 0,
         'page' => 0,
-        'resource' => 0,
+        'resource' => 'resource',
       ),
       'target_type' => 'node',
     ),
@@ -39,7 +39,7 @@ function visualization_entity_recline_field_reference_field_default_field_bases(
       'dataset' => 0,
       'group' => 0,
       'page' => 0,
-      'resource' => 0,
+      'resource' => 'resource',
     ),
     'translatable' => 0,
     'type' => 'uuidreference',
