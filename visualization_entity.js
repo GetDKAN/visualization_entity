@@ -15,12 +15,12 @@
         return false;
       });
       function renderIframeCode(e){
-      	var prop = (e.currentTarget.id === 'embed-height')? 'height': 'width';
-      	var value = ($(this).val()) ? $(this).val() : (prop === 'height')? '600' : '960';
+        var prop = (e.currentTarget.id === 'embed-height') ? 'height' : 'width';
+        var value = ($(this).val()) ? $(this).val() : (prop === 'height') ? '600' : '960';
 
-      	var iframe = $('.visualization-embed #embed-code').text();
-      	var newCode = $(iframe).prop(prop, value).get(0).outerHTML;
-      	$('.visualization-embed #embed-code').text(newCode);
+        var iframe = $('.visualization-embed #embed-code').text();
+        var newCode = $(iframe).prop(prop, value).get(0).outerHTML;
+        $('.visualization-embed #embed-code').text(newCode);
       }
     },
   };
