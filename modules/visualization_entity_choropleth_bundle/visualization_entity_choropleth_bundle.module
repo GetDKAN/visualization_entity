@@ -63,10 +63,7 @@ function visualization_entity_choropleth_bundle_libraries_info() {
     'vendor url' => 'http://driven-by-data.net/about/chromajs/#/0',
     'download url' => 'https://github.com/gka/chroma.js/zipball/master',
     'path' => '',
-    'version arguments' => array(
-      'file' => 'bower.json',
-      'pattern' => '/"version": "(\d+\.\d+\.\d+)"/',
-    ),
+    'version' => "1.1.1",
     'files' => array(
       'js' => array(
         'chroma.min.js',
