@@ -4,7 +4,6 @@ package = NUCIVIC
 dependencies[] = entity
 dependencies[] = features
 dependencies[] = features_roles_permissions
-dependencies[] = portal_administrator_role
 dependencies[] = rules
 dependencies[] = role_export
 features[features_api][] = api:2
