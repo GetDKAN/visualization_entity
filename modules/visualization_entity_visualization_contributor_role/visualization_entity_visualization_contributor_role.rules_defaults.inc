@@ -17,7 +17,7 @@ function visualization_entity_visualization_contributor_role_default_rules_confi
       "IF" : [
         { "user_has_role" : {
             "account" : [ "account" ],
-            "roles" : { "value" : { "27274083" : "27274083" } }
+            "roles" : { "value" : { "57821158" : "57821158" } }
           }
         }
       ],
