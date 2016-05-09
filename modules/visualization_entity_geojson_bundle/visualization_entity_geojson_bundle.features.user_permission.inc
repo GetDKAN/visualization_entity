@@ -13,7 +13,10 @@ function visualization_entity_geojson_bundle_user_default_permissions() {
   // Exported permission: 'eck view visualization geojson_visualization entities'.
   $permissions['eck view visualization geojson_visualization entities'] = array(
     'name' => 'eck view visualization geojson_visualization entities',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'anonymous user', 
+      '1' => 'authenticated user',
+    ),
     'module' => 'eck',
   );
 

@@ -9,7 +9,6 @@ dependencies[] = libraries
 dependencies[] = geo_file_entity_geojson_bundle
 dependencies[] = visualization_entity
 dependencies[] = visualization_entity_recline_field_reference
-dependencies[] = visualization_entity_visualization_contributor_role
 features[eck_bundle][] = visualization_choropleth_visualization
 features[features_api][] = api:2
 features[field_base][] = field_average_multiple_rows
