@@ -7,18 +7,18 @@
 /**
  * Implements hook_user_default_permissions().
  */
-function visualization_entity_choropleth_bundle_user_default_permissions() {
-  $permissions = array();
+// function visualization_entity_choropleth_bundle_user_default_permissions() {
+//   $permissions = array();
 
-  // Exported permission: 'eck view visualization choropleth_visualization entities'.
-  $permissions['eck view visualization choropleth_visualization entities'] = array(
-    'name' => 'eck view visualization choropleth_visualization entities',
-    'roles' => array(
-      '0' => 'anonymous user', 
-      '1' => 'authenticated user',
-    ),
-    'module' => 'eck',
-  );
+//   // Exported permission: 'eck view visualization choropleth_visualization entities'.
+//   $permissions['eck view visualization choropleth_visualization entities'] = array(
+//     'name' => 'eck view visualization choropleth_visualization entities',
+//     'roles' => array(
+//       '0' => 'anonymous user', 
+//       '1' => 'authenticated user',
+//     ),
+//     'module' => 'eck',
+//   );
 
-  return $permissions;
-}
+//   return $permissions;
+// }
