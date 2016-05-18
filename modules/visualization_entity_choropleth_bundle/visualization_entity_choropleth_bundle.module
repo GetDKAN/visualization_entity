@@ -272,13 +272,13 @@ function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type
       $resource_settings = array(
         'title' => $title,
         'avg' => $average,
-        'datastoreStatus' => dkan_datastore_status($resource),
+        'datastoreStatus' => intval(dkan_datastore_status($resource)),
         'unitOfMeasure' => $unit_of_measure,
         'map' => FALSE,
       );
       $file_field = $resource->recline_file_field;
 
-      if (dkan_datastore_status($resource) === 2 || count($resources) > 1) {
+      if (dkan_datastore_status($resource) == 2 || count($resources) > 1) {
         $delimiter = $file_field[LANGUAGE_NONE][0]['delimiter'];
         $delimiter = $delimiter !== NULL ? $delimiter : DEFAULT_CSV_DELIMITER;
         $resource_path = $file_field[LANGUAGE_NONE][0]['uri'];
@@ -290,7 +290,7 @@ function visualization_entity_choropleth_bundle_entity_view_alter(&$build, $type
           'avg' => $average,
         );
       }
-      elseif (dkan_datastore_status($resource) === 1 && count($resources) === 1) {
+      elseif (dkan_datastore_status($resource) == 1 && count($resources) === 1) {
         $resource_settings += array(
           'resource_id' => $resource->uuid,
         );
