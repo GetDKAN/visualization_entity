@@ -7,7 +7,7 @@ projects[eck][subdir] = contrib
 projects[geo_file_entity][subdir] = contrib
 projects[geo_file_entity][download][type] = git
 projects[geo_file_entity][download][url] = https://github.com/NuCivic/geo_file_entity.git
-projects[geo_file_entity][download][branch] = 938_geo_file_view
+projects[geo_file_entity][download][branch] = master
 projects[geo_file_entity][type] = module
 
 projects[uuidreference][subdir] = contrib
