@@ -88,6 +88,7 @@ function visualization_entity_embed_edit_form($form, &$form_state) {
     '#process' => array('ctools_dependent_process'),
     '#dependency' => array('radio:source_origin' => array('remote')),
     '#required' => FALSE,
+    '#maxlength' => '500',
   );
   $form['width'] = array(
     '#title' => t('Width'),
