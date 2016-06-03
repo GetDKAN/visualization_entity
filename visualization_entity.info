@@ -1,5 +1,5 @@
 name = Visualization Entity
-description = Base module to create visualizations
+description = QA test
 core = 7.x
 package = NuCivic
 dependencies[] = eck
