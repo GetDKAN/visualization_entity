@@ -7,18 +7,48 @@
 include_once 'visualization_entity.features.inc';
 include_once drupal_get_path('module', 'visualization_entity') . '/includes/utils.inc';
 
+
+/**
+ * Load callback for %visualization_entity.
+ */
+function visualization_entity_load($entity_id) {
+  if(is_numeric($entity_id)) {
+    $entity = entity_load_single(
+      'visualization',
+      $entity_id
+    );
+  } else if (function_exists('entity_uuid_load') && uuid_is_valid($entity_id)) {
+    $entity = entity_uuid_load('visualization', array($entity_id));
+    $entity =  ($entity) ? reset($entity) : FALSE;
+  } else {
+    drupal_not_found();
+    exit();
+  }
+  return $entity;
+}
+
 /**
  * Implements hook_menu().
  */
 function visualization_entity_menu() {
   return array(
-    'visualization/%/%/iframe' => array(
+    'visualization/%/%visualization_entity/iframe' => array(
       'title' => 'Visualization',
       'page callback' => 'visualization_entity_iframe',
       'page arguments' => array(2),
       'access arguments' => array('access content'),
     ),
   );
+}
+
+function visualization_entity_menu_alter(&$items){
+  foreach ($items as $key => $value) {
+    if(strpos($key, '%eckentity') !== FALSE && strpos($key, 'visualization') !== FALSE) {
+      $new_key = str_replace('%eckentity', '%visualization_entity', $key);
+      $items[$new_key] = $items[$key];
+      unset($items[$key]);
+    }
+  }
 }
 
 /**
@@ -75,12 +105,7 @@ function visualization_entity_attach_embed_widget($markup, $element) {
  * @return string
  *   A rendered entity or MENU_NOT_FOUND constant
  */
-function visualization_entity_iframe($entity_id) {
-  $entity = entity_load_single(
-    'visualization',
-    $entity_id
-  );
-
+function visualization_entity_iframe($entity) {
   if (!empty($entity)) {
     $entity_view = entity_view('visualization', array($entity), 'full');
     $visualization = drupal_render($entity_view);
@@ -89,6 +114,30 @@ function visualization_entity_iframe($entity_id) {
   else {
     return MENU_NOT_FOUND;
   }
+}
+
+function visualization_entity_entity_info_alter(&$entity_info) {
+  if(uuid_is_valid(arg(2))) {
+    $entity_info['visualization']['uri callback'] = 'visualization_entity_uri';
+  }
+}
+
+/**
+ * Entity URI callback.
+ *
+ * @param object $entity
+ *   an object as returned by entity_load().
+ */
+function visualization_entity_uri($entity) {
+
+  // Override visualization uri by uuid.
+  if(property_exists($entity, 'uuid')) {
+    module_load_include('inc', 'eck', 'eck.entity');
+    $crud_info = get_bundle_crud_info($entity->entityType(), $entity->bundle());
+    $view_path = str_replace('%eckentity', $entity->uuid, $crud_info['view']['path']);
+    return array('path' => $view_path);
+  }
+  return array('path' => '');
 }
 
 /**
