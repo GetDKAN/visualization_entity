@@ -112,10 +112,11 @@ function visualization_entity_entity_view_alter(&$build, $type) {
  * Markup for embed widget.
  */
 function visualization_entity_attach_embed_widget($markup, $element) {
+  $id = ($element['#entity']->uuid) ? $element['#entity']->uuid : $element['#entity']->id;
   $module_path = drupal_get_path('module', 'visualization_entity');
   $embed_url = current_path();
   if (!is_numeric(strpos($embed_url, '/iframe'))) {
-    $embed_url = $embed_url . '/iframe';
+    $embed_url = '/' . $element['#entity_type'] . '/' . $element['#bundle'] . '/' . $id . '/iframe';
     $embed_url = url($embed_url, array('absolute' => TRUE));
     $embed_button = theme('visualization-embed-button', array('embed_url' => $embed_url));
     $markup .= $embed_button;
