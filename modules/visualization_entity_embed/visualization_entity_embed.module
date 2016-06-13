@@ -57,8 +57,8 @@ function visualization_entity_embed_edit_form($form, &$form_state) {
     '#description' => t(''),
     '#type' => 'radios',
     '#options' => array(
-      'local' => t('Local - visualization content created in DKAN'),
-      'remote' => t('External - data previews'),
+      'local' => t('DKAN Visualization'),
+      'remote' => t('URL - use for external visualization services, or embed URLs from DKAN resource previews'),
     ),
     '#default_value' => (!empty($conf['source_origin'])) ? $conf['source_origin'] : 'local',
     '#required' => FALSE,
@@ -79,7 +79,7 @@ function visualization_entity_embed_edit_form($form, &$form_state) {
   );
   $form['remote_source'] = array(
     '#title' => t('Url'),
-    '#description' => t('Place a remote visualization url or a data preview url'),
+    '#description' => t('Enter an embed URL for a visualization'),
     '#type' => 'textfield',
     '#default_value' => $conf['remote_source'],
     '#attributes' => array(
