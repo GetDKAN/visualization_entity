@@ -26,3 +26,41 @@ libraries[recline_choropleth][download][url] = "https://github.com/NuCivic/recli
 
 libraries[leaflet_zoomtogeometries][download][type] = "file"
 libraries[leaflet_zoomtogeometries][download][url] = "https://github.com/NuCivic/leaflet.map.zoomToGeometries.js/zipball/master"
+
+# NVD3
+libraries[nvd3][type] = libraries
+libraries[nvd3][download][type] = git
+libraries[nvd3][download][url] = "https://github.com/novus/nvd3.git"
+libraries[nvd3][download][branch] = master
+
+# D3
+libraries[d3][type] = libraries
+libraries[d3][download][type] = git
+libraries[d3][download][url] = "https://github.com/mbostock/d3.git"
+libraries[d3][download][branch] = master
+
+# GDOCS BACKEND
+libraries[gdocs][type] = libraries
+libraries[gdocs][download][type] = git
+libraries[gdocs][download][url] = "https://github.com/okfn/recline.backend.gdocs.git"
+libraries[gdocs][download][branch] = master
+
+# LODASH DATA
+libraries[lodash_data][type] = libraries
+libraries[lodash_data][download][type] = git
+libraries[lodash_data][download][url] = "https://github.com/NuCivic/lodash.data.git"
+libraries[lodash_data][download][branch] = master
+
+# SPECTRUM COLORPICKER
+libraries[spectrum][type] = libraries
+libraries[spectrum][download][type] = git
+libraries[spectrum][download][url] = https://github.com/bgrins/spectrum.git
+libraries[spectrum][destination] = libraries
+libraries[spectrum][download][branch] = master
+libraries[spectrum][directory_name]= bgrins-spectrum
+
+# RECLINE NVD3 VIEW
+libraries[reclineViewNvd3][type] = libraries
+libraries[reclineViewNvd3][download][type] = git
+libraries[reclineViewNvd3][download][url] = "https://github.com/NuCivic/recline.view.nvd3.js.git"
+libraries[reclineViewNvd3][download][branch] = master
