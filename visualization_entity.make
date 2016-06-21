@@ -36,7 +36,7 @@ libraries[nvd3][download][branch] = master
 # D3
 libraries[d3][type] = libraries
 libraries[d3][download][type] = git
-libraries[d3][download][url] = "https://github.com/mbostock/d3.git"
+libraries[d3][download][url] = "https://github.com/d3/d3.git"
 libraries[d3][download][branch] = master
 
 # GDOCS BACKEND
