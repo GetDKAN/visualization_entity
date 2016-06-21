@@ -31,7 +31,7 @@ libraries[leaflet_zoomtogeometries][download][url] = "https://github.com/NuCivic
 libraries[nvd3][type] = libraries
 libraries[nvd3][download][type] = git
 libraries[nvd3][download][url] = "https://github.com/novus/nvd3.git"
-libraries[nvd3][download][branch] = master
+libraries[nvd3][download][tag] = v1.8.3
 
 # D3
 libraries[d3][type] = libraries
@@ -43,7 +43,7 @@ libraries[d3][download][tag] = v3.5.17
 libraries[gdocs][type] = libraries
 libraries[gdocs][download][type] = git
 libraries[gdocs][download][url] = "https://github.com/okfn/recline.backend.gdocs.git"
-libraries[gdocs][download][branch] = master
+libraries[gdocs][download][revision] = e81bb237759353932834a38a0ec810441e0ada10
 
 # LODASH DATA
 libraries[lodash_data][type] = libraries
@@ -56,7 +56,7 @@ libraries[spectrum][type] = libraries
 libraries[spectrum][download][type] = git
 libraries[spectrum][download][url] = https://github.com/bgrins/spectrum.git
 libraries[spectrum][destination] = libraries
-libraries[spectrum][download][branch] = master
+libraries[spectrum][download][tag] = 1.8.0
 libraries[spectrum][directory_name]= bgrins-spectrum
 
 # RECLINE NVD3 VIEW
