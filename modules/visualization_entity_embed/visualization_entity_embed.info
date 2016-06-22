@@ -1,6 +1,6 @@
 name = Visualization Entity Embed
 description = Create visualization panes for panels
 package = Data Visualization
-version = 7.x-1.x-dev
+version = 7.x-1.0-alpha5
 
 dependencies[] = visualization_entity
