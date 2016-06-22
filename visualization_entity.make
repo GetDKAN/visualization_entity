@@ -31,7 +31,7 @@ libraries[leaflet_zoomtogeometries][download][url] = "https://github.com/NuCivic
 libraries[nvd3][type] = libraries
 libraries[nvd3][download][type] = git
 libraries[nvd3][download][url] = "https://github.com/novus/nvd3.git"
-libraries[nvd3][download][tag] = v1.8.3
+libraries[nvd3][download][revision] = 7ebd54ca09061022a248bec9a050a4dec93e2b28
 
 # D3
 libraries[d3][type] = libraries
