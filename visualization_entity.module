@@ -151,6 +151,10 @@ function visualization_entity_iframe($entity) {
 function visualization_entity_entity_info_alter(&$entity_info) {
   // Override the default eck__entity__uri to allow uuids in the url.
   $entity_info['visualization']['uri callback'] = 'visualization_entity_uri';
+  // Override edit/delete paths.
+  $crud_info = $entity_info['visualization']['bundles']['ve_chart']['crud'];
+  $crud_info['edit']['path'] = "visualization/ve_chart/%eckentity/edit";
+  $crud_info['delete']['path'] = "visualization/ve_chart/%eckentity/delete";
 }
 
 /**
