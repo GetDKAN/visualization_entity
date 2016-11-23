@@ -60,7 +60,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</div>' +
               '</div>' +
               '<div class="col-md-12" id="controls">' +
-                '<div id="prev" class="btn btn-default pull-left">Back</div>' +
+                '<button type="button" id="prev" class="btn btn-default pull-left">Back</button>' +
                 '<button type="submit" class="form-submit btn btn-success pull-right">Finish</button>' +
               '</div>',
     events: {
@@ -192,8 +192,8 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</ul>' +
               '</div>' +
               '<div id="controls">' +
-                '<div id="prev" class="btn btn-default pull-left">Back</div>' +
-                '<div id="next" class="btn btn-primary pull-right">Next</div>' +
+                '<button type="button" id="prev" class="btn btn-default pull-left">Back</button>' +
+                '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
               '</div>',
     initialize: function(options){
       var self = this;
@@ -268,8 +268,8 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                   '{{/xDataTypes}}' +
                 '</div>' +
                 '<div id="controls">' +
-                  '<div id="prev" class="btn btn-default pull-left">Back</div>' +
-                  '<div id="next" class="btn btn-primary pull-right">Next</div>' +
+                  '<button type="button" id="prev" class="btn btn-default pull-left">Back</button>' +
+                  '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
                 '</div>' +
               '</div>',
     initialize: function(options){
@@ -323,7 +323,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</select>' +
               '</div>' +
               '<div id="controls">' +
-                '<div id="next" class="btn btn-primary pull-right">Next</div>' +
+                '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
               '</div>',
     initialize: function(options){
       var self = this;
