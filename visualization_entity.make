@@ -7,7 +7,7 @@ projects[eck][subdir] = contrib
 projects[geo_file_entity][subdir] = contrib
 projects[geo_file_entity][download][type] = git
 projects[geo_file_entity][download][url] = https://github.com/NuCivic/geo_file_entity.git
-projects[geo_file_entity][download][branch] = master
+projects[geo_file_entity][download][revision] = be45046e636cfebbbb53a314c0f3693fc2e03d39
 projects[geo_file_entity][type] = module
 
 projects[uuidreference][subdir] = contrib
@@ -49,7 +49,7 @@ libraries[gdocs][download][revision] = e81bb237759353932834a38a0ec810441e0ada10
 libraries[lodash_data][type] = libraries
 libraries[lodash_data][download][type] = git
 libraries[lodash_data][download][url] = "https://github.com/NuCivic/lodash.data.git"
-libraries[lodash_data][download][branch] = master
+libraries[lodash_data][download][revision] = 0dbe0701003b8a45037ab5fada630db2dbf75d9d
 
 # SPECTRUM COLORPICKER
 libraries[spectrum][type] = libraries
@@ -63,4 +63,4 @@ libraries[spectrum][directory_name]= bgrins-spectrum
 libraries[reclineViewNvd3][type] = libraries
 libraries[reclineViewNvd3][download][type] = git
 libraries[reclineViewNvd3][download][url] = "https://github.com/NuCivic/recline.view.nvd3.js.git"
-libraries[reclineViewNvd3][download][branch] = master
+libraries[reclineViewNvd3][download][revision] = 6e3576f032f9dad8971fa753a3f89751dd71d83d
