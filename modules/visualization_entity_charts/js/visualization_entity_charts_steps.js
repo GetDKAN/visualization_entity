@@ -60,7 +60,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</div>' +
               '</div>' +
               '<div class="col-md-12" id="controls">' +
-                '<div id="prev" class="btn btn-default pull-left">Back</div>' +
+                '<button type="button" id="prev" class="btn btn-default pull-left">Back</button>' +
                 '<button type="submit" class="form-submit btn btn-success pull-right">Finish</button>' +
               '</div>',
     events: {
@@ -185,15 +185,15 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                   '<label>Series fields</label>' +
                   '<div>{{seriesFields}}</div>'+
                 '</div>' +
-                '<ul id="chart-selector">' +
+                '<div id="chart-selector">' +
                   '{{#graphTypes}}' +
-                    '<li class="{{value}} {{#selected}}selected{{/selected}}" data-selected="{{value}}"></li>' +
+                    '<button type="button" class="{{value}} {{#selected}}selected{{/selected}}" data-selected="{{value}}"></button>' +
                   '{{/graphTypes}}' +
                 '</ul>' +
               '</div>' +
               '<div id="controls">' +
-                '<div id="prev" class="btn btn-default pull-left">Back</div>' +
-                '<div id="next" class="btn btn-primary pull-right">Next</div>' +
+                '<button type="button" id="prev" class="btn btn-default pull-left">Back</button>' +
+                '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
               '</div>',
     initialize: function(options){
       var self = this;
@@ -205,26 +205,27 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       };
     },
     events: {
-      'click #chart-selector li': 'selectChart'
+      'click #chart-selector button': 'selectChart'
     },
     selectChart: function(e){
       var self = this;
-      self.$('li').removeClass('selected');
+      self.$('button').removeClass('selected');
       self.$(e.target).addClass('selected');
     },
     getSelected: function(){
       var self = this;
-      return self.$('li.selected').data('selected');
+      return self.$('button.selected').data('selected');
     },
     render: function(){
       var self = this;
-      var graphTypes = ['discreteBarChart', 'multiBarChart', 'multiBarHorizontalChart', 'stackedAreaChart', 'pieChart',
-        'lineChart', 'lineWithFocusChart', 'scatterChart', 'linePlusBarChart'
+      var graphTypes = [
+        'discreteBarChart', 'multiBarChart', 'multiBarHorizontalChart', 'stackedAreaChart',
+        'pieChart', 'lineChart', 'lineWithFocusChart', 'scatterChart', 'linePlusBarChart'
       ];
-
-      self.state.set('graphTypes', _.applyOption(
-        _.arrayToOptions(graphTypes), [self.state.get('graphType') || 'discreteBarChart']
-      ));
+      self.state.set('graphTypes', graphTypes.map(function(type, index){
+        var selected = type === (self.state.get('graphType') || 'discreteBarChart' );
+        return {value: type, selected: selected};
+      }));
       self.$el.html(Mustache.render(self.template, self.state.toJSON()));
       self.$('.chosen-select').chosen({width: '95%'});
     },
@@ -268,8 +269,8 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                   '{{/xDataTypes}}' +
                 '</div>' +
                 '<div id="controls">' +
-                  '<div id="prev" class="btn btn-default pull-left">Back</div>' +
-                  '<div id="next" class="btn btn-primary pull-right">Next</div>' +
+                  '<button type="button" id="prev" class="btn btn-default pull-left">Back</button>' +
+                  '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
                 '</div>' +
               '</div>',
     initialize: function(options){
@@ -323,7 +324,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</select>' +
               '</div>' +
               '<div id="controls">' +
-                '<div id="next" class="btn btn-primary pull-right">Next</div>' +
+                '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
               '</div>',
     initialize: function(options){
       var self = this;
