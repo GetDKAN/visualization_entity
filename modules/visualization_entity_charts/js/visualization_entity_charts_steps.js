@@ -187,7 +187,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</div>' +
                 '<div id="chart-selector">' +
                   '{{#graphTypes}}' +
-                    '<button type="button" class="{{value}} {{#selected}}selected{{/selected}}" data-selected="{{value}}"></button>' +
+                    '<button type="button" class="{{value}} {{#selected}}selected{{/selected}}" data-selected="{{value}}"><span class="sr-only">{{value}}</span></button>' +
                   '{{/graphTypes}}' +
                 '</ul>' +
               '</div>' +
@@ -247,7 +247,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                     '<div>{{source.url}}</div>'+
                   '</div>' +
                   '<label for="control-chart-series">Series</label>' +
-                  '<select id="control-chart-series" multiple class="form-control chosen-select">' +
+                  '<select title="Select a column whose values will be used as series" id="control-chart-series" multiple class="form-control chosen-select">' +
                     '{{#fields}}' +
                       '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
                     '{{/fields}}' +
@@ -317,7 +317,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '<input value="{{source.url}}" type="text" id="control-chart-source" class="form-control" />' +
               '</div>' +
               '<div class="form-group">' +
-                '<select id="control-chart-backend" class="form-control">' +
+                '<select title="Select backend source type" id="control-chart-backend" class="form-control">' +
                   '<option value="csv">CSV</option>' +
                   '<option value="gdocs">Google Spreadsheet</option>' +
                   '<option value="dataproxy">DataProxy</option>' +
