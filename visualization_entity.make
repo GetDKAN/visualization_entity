@@ -63,4 +63,4 @@ libraries[spectrum][directory_name]= bgrins-spectrum
 libraries[reclineViewNvd3][type] = libraries
 libraries[reclineViewNvd3][download][type] = git
 libraries[reclineViewNvd3][download][url] = "https://github.com/NuCivic/recline.view.nvd3.js.git"
-libraries[reclineViewNvd3][download][branch] = civic-5095-charts-508
+libraries[reclineViewNvd3][download][branch] = master
