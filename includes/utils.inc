@@ -77,7 +77,9 @@ function visualization_entity_has_csv_extension($file_field) {
  *  Get csv columns from a csv file.
  */
 function visualization_entity_csv_columns($file_field) {
-  return array_map('strtolower', visualization_entity_csv_row($file_field, 0));
+  $columns = array_map('strtolower', visualization_entity_csv_row($file_field, 0));
+  $columns = array_map('trim', $columns);
+  return $columns;
 }
 
 /**
