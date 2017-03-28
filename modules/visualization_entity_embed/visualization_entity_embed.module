@@ -97,14 +97,12 @@ function visualization_entity_embed_edit_form($form, &$form_state) {
     '#description' => t('Configure the width (e.g. 100%)'),
     '#type' => 'textfield',
     '#default_value' => $conf['width'],
-    '#required' => TRUE,
   );
   $form['height'] = array(
     '#title' => t('Height'),
     '#description' => t('Configure the height (e.g. 420)'),
     '#type' => 'textfield',
     '#default_value' => $conf['height'],
-    '#required' => TRUE,
   );
 
   return $form;
