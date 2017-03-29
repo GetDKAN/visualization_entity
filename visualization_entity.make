@@ -37,7 +37,7 @@ libraries:
     download:
       type: git
       url: 'https://github.com/novus/nvd3.git'
-      revision: 7ebd54ca09061022a248bec9a050a4dec93e2b28
+      tag: v1.8.5
   d3:
     download:
       type: git
@@ -64,4 +64,4 @@ libraries:
     download:
       type: git
       url: 'https://github.com/NuCivic/recline.view.nvd3.js.git'
-      branch: CIVIC-6001
+      branch: CIVIC-6000
