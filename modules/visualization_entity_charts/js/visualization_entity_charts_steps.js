@@ -313,10 +313,13 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
    */
   global.LoadDataView = Backbone.View.extend({
     template: '<div class="form-group">' +
-                '<label for="control-chart-source">Source</label>' +
+                '<label for="control-chart-source">Source Url</label>' +
+                ' <em>(Auto-populated if using DKAN.)</em>' +
                 '<input value="{{source.url}}" type="text" id="control-chart-source" class="form-control" />' +
               '</div>' +
               '<div class="form-group">' +
+                '<label for="control-chart-backend">Source Type</label>' +
+                ' <em>(Experimental : Backends other than DKAN are still a work in progress.)</em>' +
                 '<select title="Select backend source type" id="control-chart-backend" class="form-control">' +
                   '<option value="csv">CSV</option>' +
                   '<option value="gdocs">Google Spreadsheet</option>' +

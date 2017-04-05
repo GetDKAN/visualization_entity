@@ -30,6 +30,7 @@ svg {
 
 #ve-chart-form .pane-content{
   overflow: auto;
+  padding: 4px;
 }
 
 #ve-chart-form .stages li {

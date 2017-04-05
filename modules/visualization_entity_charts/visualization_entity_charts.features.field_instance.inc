@@ -46,7 +46,7 @@ function visualization_entity_charts_field_default_field_instances() {
         'rows' => 2,
       ),
       'type' => 'text_textarea',
-      'weight' => 0,
+      'weight' => 1,
     ),
   );
 
