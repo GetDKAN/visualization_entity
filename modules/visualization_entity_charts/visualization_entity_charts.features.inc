@@ -14,6 +14,7 @@ function visualization_entity_charts_eck_bundle_info() {
       'entity_type' => 'visualization',
       'name' => 've_chart',
       'label' => 'Chart',
+      'config' => array(),
     ),
   );
   return $items;
