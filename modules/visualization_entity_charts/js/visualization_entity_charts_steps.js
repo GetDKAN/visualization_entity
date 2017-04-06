@@ -310,9 +310,11 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
 
   /**
    * Load data view
+   *
+   * Hiding Source Url field until further work can be done on it, it is useless at this point.
    */
   global.LoadDataView = Backbone.View.extend({
-    template: '<div class="form-group">' +
+    template: '<div class="form-group" style="display:none;">' +
                 '<label for="control-chart-source">Source Url</label>' +
                 ' <em>(Auto-populated if using DKAN.)</em>' +
                 '<input value="{{source.url}}" type="text" id="control-chart-source" class="form-control" />' +
