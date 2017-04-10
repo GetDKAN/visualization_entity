@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Provides multi-page form for chart visualization.
+ */
+
 this.recline = this.recline || {};
 this.recline.View = this.recline.View || {};
 this.recline.View.nvd3 = this.recline.View.nvd3 || {};
@@ -6,7 +11,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
   'use strict';
 
   /**
-   * Chart options step
+   * Chart options step.
    */
   global.ChartOptionsView = Backbone.View.extend({
     template: '<div class="col-md-12" id="chart-with-controls">' +
@@ -20,19 +25,19 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                       '<div  id="chart-viewport"></div>' +
                       '<div class="form-group">' +
                         '<label>Source</label>' +
-                        '<div>{{source.url}}</div>'+
+                        '<div>{{source.url}}</div>' +
                       '</div>' +
                       '<div class="form-group">' +
                         '<label>X Field</label>' +
-                        '<div>{{xfield}}</div>'+
+                        '<div>{{xfield}}</div>' +
                       '</div>' +
                       '<div class="form-group">' +
                         '<label>Series fields</label>' +
-                        '<div>{{seriesFields}}</div>'+
+                        '<div>{{seriesFields}}</div>' +
                       '</div>' +
                       '<div class="form-group">' +
                         '<label>Graph Type</label>' +
-                        '<div>{{graphType}}</div>'+
+                        '<div>{{graphType}}</div>' +
                       '</div>' +
                     '</div>' +
                     '<div role="tabpanel" class="tab-pane" id="dataset-tab">' +
@@ -66,7 +71,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     events: {
       '#query-editor button': 'onEditorUpdate'
     },
-    initialize: function(options){
+    initialize: function (options) {
       var self = this;
       self.options = _.defaults(options || {}, self.options);
       self.state = self.options.state;
@@ -77,12 +82,12 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         name: 'chartOptions'
       };
     },
-    copyQueryState: function(){
+    copyQueryState: function () {
       console.log('copyQueryState');
       var self = this;
       self.state.set('queryState', self.state.get('model').queryState.toJSON());
     },
-    render: function(){
+    render: function () {
       var self = this;
       var graphType = self.state.get('graphType');
 
@@ -92,10 +97,10 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         self.graph.render();
       });
 
-      self.$('.expander').on('click', function(){
+      self.$('.expander').on('click', function () {
         var visible = self.$(this).next().is(':visible');
         var sp = self.$(this).find('span');
-        var sign = (!visible) ? '-' : '+' ;
+        var sign = (!visible) ? '-' : '+';
         sp.html(sign);
         self.$(this).next().slideToggle('fast');
       });
@@ -112,25 +117,25 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         state: self.state
       });
 
-      // Pager widget
+      // Pager widget.
       self.pager = new recline.View.Pager({
         model: self.state.get('model'),
         state: self.state
       });
 
-      // Search wiget
+      // Search wiget.
       self.queryEditor = new recline.View.nvd3.QueryEditor({
         model: self.state.get('model').queryState,
         state: self.state
       });
 
-      // Filter widget
+      // Filter widget.
       self.filterEditor = new recline.View.nvd3.FilterEditor({
         model: self.state.get('model'),
         state: self.state
       });
 
-      // Grid
+      // Grid.
       self.grid = new recline.View.SlickGrid({
         model: self.state.get('model'),
         el: self.$('#grid'),
@@ -145,7 +150,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       self.assign(self.queryEditor, '#query-editor');
       self.assign(self.filterEditor, '#filter-editor');
 
-      // Slickgrid needs to update after tab content is displayed
+      // Slickgrid needs to update after tab content is displayed.
       $('#grid')
       .closest('.tab-content')
       .prev()
@@ -156,38 +161,38 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
 
       self.$('.chosen-select').chosen({width: '95%'});
     },
-    onEditorUpdate: function(){
+    onEditorUpdate: function () {
       return false;
     },
-    updateState: function(state, cb){
+    updateState: function (state, cb) {
       cb(state);
     },
-    assign: function(view, selector){
+    assign: function (view, selector) {
       var self = this;
       view.setElement(self.$(selector)).render();
     },
   });
 
   /**
-   * Choose chart view
+   * Choose chart view.
    */
   global.ChooseChartView = Backbone.View.extend({
     template: '<div class="form-group">' +
                 '<div class="form-group">' +
                   '<label>Source</label>' +
-                  '<div>{{source.url}}</div>'+
+                  '<div>{{source.url}}</div>' +
                 '</div>' +
                 '<div class="form-group">' +
                   '<label>X Field</label>' +
-                  '<div>{{xfield}}</div>'+
+                  '<div>{{xfield}}</div>' +
                 '</div>' +
                 '<div class="form-group">' +
                   '<label>Series fields</label>' +
-                  '<div>{{seriesFields}}</div>'+
+                  '<div>{{seriesFields}}</div>' +
                 '</div>' +
                 '<div id="chart-selector">' +
                   '{{#graphTypes}}' +
-                    '<button type="button" class="{{value}} {{#selected}}selected{{/selected}}" data-selected="{{value}}"><span class="sr-only">{{value}}</span></button>' +
+                    '<button type="button" class="{{value}} {{#selected}}selected{{/selected}}" data-selected="{{value}}"  data-toggle="popover" data-placement="top" data-trigger="hover" data-content="{{value}}"><span class="sr-only">{{value}}</span></button>' +
                   '{{/graphTypes}}' +
                 '</ul>' +
               '</div>' +
@@ -195,7 +200,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '<button type="button" id="prev" class="btn btn-default pull-left">Back</button>' +
                 '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
               '</div>',
-    initialize: function(options){
+    initialize: function (options) {
       var self = this;
       self.options = _.defaults(options || {}, self.options);
       self.state = self.options.state;
@@ -207,29 +212,31 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     events: {
       'click #chart-selector button': 'selectChart'
     },
-    selectChart: function(e){
+    selectChart: function (e) {
       var self = this;
       self.$('button').removeClass('selected');
       self.$(e.target).addClass('selected');
     },
-    getSelected: function(){
+    getSelected: function () {
       var self = this;
       return self.$('button.selected').data('selected');
     },
-    render: function(){
+    render: function () {
       var self = this;
       var graphTypes = [
         'discreteBarChart', 'multiBarChart', 'multiBarHorizontalChart', 'stackedAreaChart',
         'pieChart', 'lineChart', 'lineWithFocusChart', 'scatterChart', 'linePlusBarChart'
       ];
-      self.state.set('graphTypes', graphTypes.map(function(type, index){
-        var selected = type === (self.state.get('graphType') || 'discreteBarChart' );
+      self.state.set('graphTypes', graphTypes.map(function (type, index) {
+        var selected = type === (self.state.get('graphType') || 'discreteBarChart');
         return {value: type, selected: selected};
       }));
       self.$el.html(Mustache.render(self.template, self.state.toJSON()));
       self.$('.chosen-select').chosen({width: '95%'});
+
+      $('[data-toggle="popover"]').popover({ trigger: "hover" });
     },
-    updateState: function(state, cb){
+    updateState: function (state, cb) {
       var self = this;
       var type = self.getSelected();
       state.set('graphType', type);
@@ -238,15 +245,16 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
   });
 
   /**
-   * Data options view
+   * Data options view.
    */
   global.DataOptionsView = Backbone.View.extend({
     template: '<div class="form-group">' +
                   '<div class="form-group">' +
                     '<label>Source</label>' +
-                    '<div>{{source.url}}</div>'+
+                    '<div>{{source.url}}</div>' +
                   '</div>' +
                   '<label for="control-chart-series">Series</label>' +
+                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Series Help" data-content="Select a column whose values will be used as series."><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
                   '<select title="Select a column whose values will be used as series" id="control-chart-series" multiple class="form-control chosen-select">' +
                     '{{#fields}}' +
                       '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
@@ -255,6 +263,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</div>' +
                 '<div class="form-group">' +
                   '<label for="control-chart-xfield">X-Field</label>' +
+                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Help" data-content="Enter the column title to use for the X-axis here."><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
                   '<select id="control-chart-xfield" class="form-control chosen-select">' +
                     '{{#xfields}}' +
                       '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
@@ -262,6 +271,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                   '</select>' +
                 '</div>' +
                 '<div class="form-group relative">' +
+                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Data Type Help" data-content="Select the type of data used for the X-Field"><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
                   '{{#xDataTypes}}' +
                     '<label class="radio-inline">' +
                       '<input type="radio" name="control-chart-x-data-type" id="control-chart-x-data-type-{{value}}" value="{{value}}" {{#selected}}checked {{/selected}}> {{name}}' +
@@ -273,7 +283,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                   '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
                 '</div>' +
               '</div>',
-    initialize: function(options){
+    initialize: function (options) {
       var self = this;
       self.options = _.defaults(options || {}, self.options);
       self.state = self.options.state;
@@ -282,7 +292,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         name: 'dataOptions'
       };
     },
-    render: function(){
+    render: function () {
       var self = this;
       var dataTypes = ['Number', 'String', 'Date', 'Auto'];
 
@@ -298,8 +308,10 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
 
       self.$el.html(Mustache.render(self.template, self.state.toJSON()));
       self.$('.chosen-select').chosen({width: '95%'});
+
+      $('[data-toggle="popover"]').popover();
     },
-    updateState: function(state, cb){
+    updateState: function (state, cb) {
       var self = this;
       state.set('seriesFields', self.$('#control-chart-series').val());
       state.set('xfield', self.$('#control-chart-xfield').val());
@@ -309,7 +321,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
   });
 
   /**
-   * Load data view
+   * Load data view.
    */
   global.LoadDataView = Backbone.View.extend({
     template: '<div class="form-group">' +
@@ -325,7 +337,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
               '<div id="controls">' +
                 '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
               '</div>',
-    initialize: function(options){
+    initialize: function (options) {
       var self = this;
       self.options = _.defaults(options || {}, self.options);
       self.state = self.options.state;
@@ -335,11 +347,11 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         name: 'loadData'
       };
     },
-    render: function(){
+    render: function () {
       var self = this;
       self.$el.html(Mustache.render(self.template, self.state.toJSON()));
     },
-    updateState: function(state, cb){
+    updateState: function (state, cb) {
       var self = this;
       var url = self.$('#control-chart-source').val();
       var backend = self.$('#control-chart-backend').val();
@@ -359,7 +371,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
   });
 
   /**
-   * Multi stage view
+   * Multi stage view.
    */
   global.MultiStageView = Backbone.View.extend({
     template: '<h3>{{title}}</h3>' +
@@ -369,7 +381,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       'click #next': 'nextStep',
       'click #prev': 'prevStep'
     },
-    initialize: function(options){
+    initialize: function (options) {
       var self = this;
       self.options = _.defaults(options || {}, self.options);
       self.state = self.options.state;
@@ -379,7 +391,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
 
       self.state.set('step', self.currentStep);
     },
-    render: function(){
+    render: function () {
       var self = this;
       self.currentView = self.getStep(self.currentStep);
       _.extend(self.currentView.stepInfo, {state:JSON.stringify(self.state.toJSON())});
@@ -388,51 +400,51 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       self.assign(self.currentView, '#step');
       return self;
     },
-    assign: function(view, selector){
+    assign: function (view, selector) {
       var self = this;
       view.setElement(self.$(selector)).render();
     },
-    addStep: function(view){
+    addStep: function (view) {
       var self = this;
       self.steps.push(view);
     },
-    getStep: function(index){
+    getStep: function (index) {
       var self = this;
       return self.steps[index];
     },
-    nextStep: function(){
+    nextStep: function () {
       var self = this;
       var toNext = self.updateStep(self.getNext(self.steps, self.currentStep));
       self.currentView.updateState(self.state, toNext);
     },
-    prevStep: function(){
+    prevStep: function () {
       var self = this;
       var toPrev = self.updateStep(self.getPrev(self.steps, self.currentStep));
       self.currentView.updateState(self.state, toPrev);
     },
-    getNext: function(steps, current){
+    getNext: function (steps, current) {
       var limit = steps.length - 1;
-      if(limit === current){
+      if (limit === current) {
         return current;
       }
       return ++current;
     },
-    getPrev: function(steps, current){
-      if(current){
+    getPrev: function (steps, current) {
+      if (current) {
         return --current;
       }
       return current;
     },
-    updateStep: function(n){
+    updateStep: function (n) {
       var self = this;
-      return function(state){
+      return function (state) {
         self.state = state;
         self.gotoStep(n);
         self.trigger('multistep:change', {step:n});
         self.$('.chosen-choices .search-field input, .chosen-search input').attr('aria-label', 'Choose some options');
       };
     },
-    gotoStep: function(n){
+    gotoStep: function (n) {
       var self = this;
       self.currentStep = n;
       self.state.set('step', self.currentStep);

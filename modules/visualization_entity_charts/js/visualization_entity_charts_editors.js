@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Visualization Entity Chart Editors.
+ */
+
 this.recline = this.recline || {};
 this.recline.View = this.recline.View || {};
 this.recline.View.nvd3 = this.recline.View.nvd3 || {};
@@ -25,17 +30,17 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       'change input': 'onFormSubmit'
     },
 
-    initialize: function() {
+    initialize: function () {
       _.bindAll(this, 'render');
       this.listenTo(this.model, 'change', this.render);
       this.render();
     },
-    onFormSubmit: function(e) {
+    onFormSubmit: function (e) {
       e.preventDefault();
       var query = this.$el.find('.search-query').val();
       this.model.set({q: query});
     },
-    render: function() {
+    render: function () {
       var tmplData = this.model.toJSON();
       var templated = Mustache.render(this.template, tmplData);
       this.$el.html(templated);
@@ -46,6 +51,11 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     className: 'recline-filter-editor well',
     template: ' \
       <div class="filters"> \
+        <a class="help" tabindex="0" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" \
+        title="Create filters to narrow down the data." data-content="To create a filter: Select a field, a filter type, \
+        and click the Add button. Once your filter is created, you can adjust the values used in that filter. \
+        Multiple filters will be applied with the AND operator. \
+        To remove a filter, click on the garbage can.">Create a filter <i class="fa fa-question-circle" aria-hidden="true"></i></a> \
         <div class="form-stacked js-add"> \
           <div class="form-group"> \
             <label>Field</label> \
@@ -80,22 +90,20 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         <div class="filter-{{type}} filter"> \
           <div class="form-group"> \
             <label> \
-              {{field}} <small>{{type}}</small> \
-              <a class="js-remove-filter" href="#" title="Remove this filter" data-filter-id="{{id}}">&times;</a> \
+              {{field}} <i class="fa fa-filter" aria-hidden="true"></i><small>{{type}}</small> \
+              <a class="js-remove-filter pull-right" href="#" title="Remove this filter" data-filter-id="{{id}}"><i class="fa fa-trash" aria-hidden="true"></i></a> \
             </label> \
-            <input aria-label="Field filter value" class="form-control" type="text" value="{{term}}" name="term" data-filter-field="{{field}}" data-filter-id="{{id}}" data-filter-type="{{type}}" /> \
+            <input aria-label="Field filter value" class="form-control" type="text" value="{{term}}" name="term" data-filter-field="{{field}}" placeholder="Enter a value" data-filter-id="{{id}}" data-filter-type="{{type}}" /> \
           </div> \
         </div> \
       ',
       range: ' \
         <div class="filter-{{type}} filter"> \
           <fieldset> \
-            <div class="form-group"> \
-              <label> \
-                {{field}} <small>{{type}}</small> \
-                <a class="js-remove-filter" href="#" title="Remove this filter" data-filter-id="{{id}}">&times;</a> \
-              </label> \
-            </div> \
+            <legend> \
+              {{field}} <i class="fa fa-filter" aria-hidden="true"></i><small>{{type}}</small> \
+              <a class="js-remove-filter pull-right" href="#" title="Remove this filter" data-filter-id="{{id}}"><i class="fa fa-trash" aria-hidden="true"></i></a> \
+            </legend> \
             <div class="form-group"> \
               <label for="">From</label> \
               <input aria-label="Field filter value from" class="form-control" type="text" value="{{from}}" name="from" data-filter-field="{{field}}" data-filter-id="{{id}}" data-filter-type="{{type}}" /> \
@@ -111,8 +119,8 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         <div class="filter-{{type}} filter"> \
           <fieldset> \
             <legend> \
-              {{field}} <small>{{type}}</small> \
-              <a class="js-remove-filter" href="#" title="Remove this filter" data-filter-id="{{id}}">&times;</a> \
+              {{field}} <i class="fa fa-filter" aria-hidden="true"></i><small>{{type}}</small> \
+              <a class="js-remove-filter pull-right" href="#" title="Remove this filter" data-filter-id="{{id}}"><i class="fa fa-trash" aria-hidden="true"></i></a> \
             </legend> \
             <div class="form-group"> \
               <label class="control-label" for="">Longitude</label> \
@@ -136,34 +144,35 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       'click .js-edit button': 'onTermFiltersUpdate',
       'click #add-filter-btn': 'onAddFilter'
     },
-    initialize: function() {
+    initialize: function () {
       _.bindAll(this, 'render');
       this.listenTo(this.model.fields, 'all', this.render);
       this.listenTo(this.model.queryState, 'change change:filters:new-blank', this.render);
       this.render();
     },
-    render: function() {
+    render: function () {
       var self = this;
       var tmplData = $.extend(true, {}, this.model.queryState.toJSON());
-      // we will use idx in list as there id ...
-      tmplData.filters = _.map(tmplData.filters, function(filter, idx) {
+      // We will use idx in list as the id.
+      tmplData.filters = _.map(tmplData.filters, function (filter, idx) {
         filter.id = idx;
         return filter;
       });
       tmplData.fields = this.model.fields.toJSON();
-      tmplData.filterRender = function() {
+      tmplData.filterRender = function () {
         return Mustache.render(self.filterTemplates[this.type], this);
       };
       var out = Mustache.render(this.template, tmplData);
       this.$el.html(out);
+      $('[data-toggle="popover"]').popover();
     },
-    onAddFilterShow: function(e) {
+    onAddFilterShow: function (e) {
       e.preventDefault();
       var $target = $(e.target);
       $target.hide();
       this.$el.find('.js-add').show();
     },
-    onAddFilter: function(e) {
+    onAddFilter: function (e) {
       e.preventDefault();
       var $target = $(e.target).closest('.form-stacked');
       $target.hide();
@@ -171,18 +180,18 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       var field      = $target.find('select.fields').val();
       this.model.queryState.addFilter({type: filterType, field: field});
     },
-    onRemoveFilter: function(e) {
+    onRemoveFilter: function (e) {
       e.preventDefault();
       var $target = $(e.target);
       var filterId = $target.attr('data-filter-id');
       this.model.queryState.removeFilter(filterId);
     },
-    onTermFiltersUpdate: function(e) {
+    onTermFiltersUpdate: function (e) {
      var self = this;
       e.preventDefault();
       var filters = self.model.queryState.get('filters');
       var $form = $(e.target).closest('.form-stacked');
-      _.each($form.find('input'), function(input) {
+      _.each($form.find('input'), function (input) {
         var $input = $(input);
         var filterType  = $input.attr('data-filter-type');
         var fieldId     = $input.attr('data-filter-field');
@@ -194,11 +203,13 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
           case 'term':
             filters[filterIndex].term = value;
             break;
+
           case 'range':
             filters[filterIndex][name] = value;
             break;
+
           case 'geo_distance':
-            if(name === 'distance') {
+            if (name === 'distance') {
               filters[filterIndex].distance = parseFloat(value);
             }
             else {
@@ -229,25 +240,28 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       'change input': 'onFormSubmit'
     },
 
-    initialize: function() {
+    initialize: function () {
       _.bindAll(this, 'render');
       this.listenTo(this.model.queryState, 'change', this.render);
       this.render();
     },
-    onFormSubmit: function(e) {
+    onFormSubmit: function (e) {
       e.preventDefault();
-      // filter is 0-based; form is 1-based
-      var formFrom = parseInt(this.$el.find('input[name="from"]').val())-1;
-      var formTo = parseInt(this.$el.find('input[name="to"]').val())-1;
-      var maxRecord = this.model.recordCount-1;
-      if (this.model.queryState.get('from') != formFrom) { // changed from; update from
+      // Filter is 0-based; form is 1-based.
+      var formFrom = parseInt(this.$el.find('input[name="from"]').val()) - 1;
+      var formTo = parseInt(this.$el.find('input[name="to"]').val()) - 1;
+      var maxRecord = this.model.recordCount - 1;
+      if (this.model.queryState.get('from') != formFrom) {
+        // Changed from; update from.
         this.model.queryState.set({from: Math.min(maxRecord, Math.max(formFrom, 0))});
-      } else if (this.model.queryState.get('to') != formTo) { // change to; update size
+      }
+      else if (this.model.queryState.get('to') != formTo) {
+        // Change to; update size.
         var to = Math.min(maxRecord, Math.max(formTo, 0));
-        this.model.queryState.set({size: Math.min(maxRecord+1, Math.max(to-formFrom+1, 1))});
+        this.model.queryState.set({size: Math.min(maxRecord + 1, Math.max(to - formFrom + 1, 1))});
       }
     },
-    onPaginationUpdate: function(e) {
+    onPaginationUpdate: function (e) {
       e.preventDefault();
       var $el = $(e.target);
       var newFrom = 0;
@@ -257,7 +271,8 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       if ($el.parent().hasClass('prev')) {
         newFrom = Math.max(currFrom - Math.max(0, size), 0);
         updateQuery = newFrom != currFrom;
-      } else {
+      }
+      else {
         newFrom = Math.max(currFrom + size, 0);
         updateQuery = (newFrom < this.model.recordCount);
       }
@@ -265,11 +280,11 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         this.model.queryState.set({from: newFrom});
       }
     },
-    render: function() {
+    render: function () {
       var tmplData = this.model.toJSON();
       var from = parseInt(this.model.queryState.get('from'));
-      tmplData.from = from+1;
-      tmplData.to = Math.min(from+this.model.queryState.get('size'), this.model.recordCount);
+      tmplData.from = from + 1;
+      tmplData.to = Math.min(from + this.model.queryState.get('size'), this.model.recordCount);
       var templated = Mustache.render(this.template, tmplData);
       this.$el.html(templated);
       return this;

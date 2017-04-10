@@ -7,6 +7,9 @@
 .field-name-field-ve-settings {
   display: none;
 }
+#chart-with-controls h4 {
+  font-weight: normal;
+}
 #chart-with-controls .tab-content {
   overflow: hidden;
 }
@@ -81,6 +84,10 @@ svg {
 
 .expansible {
   margin: 10px;
+}
+.expansible .help {
+  margin-bottom: 8px;
+  display: block;
 }
 
 .form-panel {
@@ -168,4 +175,43 @@ svg {
 
 #chart-selector .linePlusBarChart {
   background-image: url('img/lineplusbar.png');
+}
+
+.filter fieldset {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 5px 0;
+  padding: 40px 8px 8px;
+  position: relative;
+}
+
+.filter fieldset legend,
+.filter-term label {
+  display: block;
+  max-width: 100%;
+  margin: 5px 0 0;
+  font-size: 1em;
+  font-weight: bold;
+  background: #DDDDDD;
+  padding: 4px 10px;
+  border-radius: 4px 4px 0 0;
+}
+.filter fieldset legend {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 6px 10px;
+  margin: 0;
+}
+.filters .form-stacked button {
+  margin-top: 10px;
+}
+.filters .filter-term input {
+  border-radius: 0 0 4px 4px
+}
+
+/* Help Pop-overs */
+.help {
+  padding: 0 8px;
 }
