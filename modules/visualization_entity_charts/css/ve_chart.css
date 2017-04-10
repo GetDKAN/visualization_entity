@@ -207,6 +207,9 @@ svg {
 .filters .form-stacked button {
   margin-top: 10px;
 }
+.filters .form-stacked button#add-filter-btn {
+  margin-top: 0;
+}
 .filters .filter-term input {
   border-radius: 0 0 4px 4px
 }

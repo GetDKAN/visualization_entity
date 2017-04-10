@@ -14,6 +14,8 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     className: 'recline-nvd3-query-editor',
     template: ' \
       <form action="" method="GET" class="form-inline" role="form"> \
+        <a class="help" tabindex="0" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" \
+        title="Query Editor Help" data-content="Some help here.">Create a query <i class="fa fa-question-circle" aria-hidden="true"></i></a> \
         <div class="form-group"> \
           <div class="input-group text-query"> \
             <div class="input-group-btn"> \
@@ -44,6 +46,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       var tmplData = this.model.toJSON();
       var templated = Mustache.render(this.template, tmplData);
       this.$el.html(templated);
+      $('[data-toggle="popover"]').popover();
     }
   });
 
@@ -51,11 +54,11 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     className: 'recline-filter-editor well',
     template: ' \
       <div class="filters"> \
-        <a class="help" tabindex="0" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" \
-        title="Create filters to narrow down the data." data-content="To create a filter: Select a field, a filter type, \
-        and click the Add button. Once your filter is created, you can adjust the values used in that filter. \
-        Multiple filters will be applied with the AND operator. \
-        To remove a filter, click on the garbage can.">Create a filter <i class="fa fa-question-circle" aria-hidden="true"></i></a> \
+        <a class="help" tabindex="0" role="button" data-toggle="popover" data-html="true" data-placement="left" data-trigger="focus" \
+        title="Create filters to narrow down the data." data-content="<p>To create a filter: Select a field, a filter type, \
+        and click the Add button.</p><p>Once your filter is created, you can adjust the values used in that filter. \
+        Multiple filters will be applied with the AND operator.</p> \
+        <p>To remove a filter, click on the garbage can.</p>">Create a filter <i class="fa fa-question-circle" aria-hidden="true"></i></a> \
         <div class="form-stacked js-add"> \
           <div class="form-group"> \
             <label>Field</label> \
