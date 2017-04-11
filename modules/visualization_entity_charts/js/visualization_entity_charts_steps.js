@@ -254,7 +254,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                     '<div>{{source.url}}</div>' +
                   '</div>' +
                   '<label for="control-chart-series">Series</label>' +
-                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Series Help" data-content="Select a column whose values will be used as series."><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
+                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Series Help" data-content="A row or column of numbers that are plotted in a chart is called a data series. Select which rows/columns to use by entering the label for that data here."><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
                   '<select title="Select a column whose values will be used as series" id="control-chart-series" multiple class="form-control chosen-select">' +
                     '{{#fields}}' +
                       '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
@@ -271,7 +271,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                   '</select>' +
                 '</div>' +
                 '<div class="form-group relative">' +
-                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Data Type Help" data-content="Select the type of data used for the X-Field"><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
+                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Data Type" data-content="You can specify the type of data used for the X-Field here if the auto-detect feature is not picking up the correct type."><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
                   '{{#xDataTypes}}' +
                     '<label class="radio-inline">' +
                       '<input type="radio" name="control-chart-x-data-type" id="control-chart-x-data-type-{{value}}" value="{{value}}" {{#selected}}checked {{/selected}}> {{name}}' +

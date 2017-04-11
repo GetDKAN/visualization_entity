@@ -85,10 +85,6 @@ svg {
 .expansible {
   margin: 10px;
 }
-.expansible .help {
-  margin-bottom: 8px;
-  display: block;
-}
 
 .form-panel {
   margin-bottom: 8px;
@@ -217,4 +213,9 @@ svg {
 /* Help Pop-overs */
 .help {
   padding: 0 8px;
+}
+#query-editor .help,
+#filter-editor .help {
+  margin-bottom: 8px;
+  display: block;
 }
