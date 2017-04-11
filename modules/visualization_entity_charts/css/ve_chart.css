@@ -215,7 +215,10 @@ svg {
 .help {
   padding: 0 8px;
 }
-#query-editor .help,
+#query-editor .help {
+  display: table-cell;
+  vertical-align: middle;
+}
 #filter-editor .help {
   margin-bottom: 8px;
   display: block;

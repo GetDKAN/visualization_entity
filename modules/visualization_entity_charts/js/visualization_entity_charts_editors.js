@@ -14,14 +14,14 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     className: 'recline-nvd3-query-editor',
     template: ' \
       <form action="" method="GET" class="form-inline" role="form"> \
-        <a class="help help" tabindex="0" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" \
-        title="How to use the Query Editor" data-content="Some helpful stuff here.">Need Help <i class="fa fa-question-circle" aria-hidden="true"></i></a> \
         <div class="form-group"> \
           <div class="input-group text-query"> \
             <div class="input-group-btn"> \
               <button type="button" class="btn btn-default">Go &raquo;</button> \
             </div> \
             <input aria-label="Search query" class="form-control search-query" type="text" name="q" value="{{q}}" placeholder="Search data ..."/> \
+            <a class="help" tabindex="0" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" \
+            title="How to use the Query Editor" data-content="Some helpful stuff here."><i class="fa fa-question-circle" aria-hidden="true"></i></a> \
           </div> \
         </div> \
       </form> \
@@ -59,7 +59,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         and click the Add button. Select Value to filter by strings (labels), select Range to filter by numerical values, \
         and select Geo distance to filter by geographical data.</p><p>Once your filter is created, you can adjust the values used in that filter.</p> \
         <p>Multiple filters will be applied with the AND operator.</p> \
-        <p>To remove a filter, click on the trash can icon.</p>">Need Help <i class="fa fa-question-circle" aria-hidden="true"></i></a> \
+        <p>To remove a filter, click on the trash can icon.</p>"><i class="fa fa-question-circle" aria-hidden="true"></i></a> \
         <div class="form-stacked js-add"> \
           <div class="form-group"> \
             <label>Field</label> \
