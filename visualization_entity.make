@@ -64,4 +64,4 @@ libraries:
     download:
       type: git
       url: 'https://github.com/NuCivic/recline.view.nvd3.js.git'
-      branch: master
+      branch: 6041_chart_axis_range
