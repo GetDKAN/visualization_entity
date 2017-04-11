@@ -103,8 +103,9 @@ svg {
 }
 
 #query-editor .btn {
-  padding: 6px 12px;
+  padding: 5px 12px;
   border-right: none;
+  height: 34px;
 }
 
 #pager li.prev.action-pagination-update a {
