@@ -57,7 +57,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         <a class="help" tabindex="0" role="button" data-toggle="popover" data-html="true" data-placement="left" data-trigger="focus" \
         title="Create filters to narrow down the data." data-content="<p>To create a filter: Select a field, a filter type, \
         and click the Add button. Select Value to filter by strings (labels), select Range to filter by numerical values, \
-        and select Geo distance to filter by geographical data.</p><p>Once your filter is created, you can adjust the values used in that filter.</p> \
+        or select Geo distance to filter by geographical data.</p><p>Once your filter is created, you can adjust the values used in that filter.</p> \
         <p>Multiple filters will be applied with the AND operator.</p> \
         <p>To remove a filter, click on the trash can icon.</p>"><i class="fa fa-question-circle" aria-hidden="true"></i></a> \
         <div class="form-stacked js-add"> \

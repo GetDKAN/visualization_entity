@@ -254,7 +254,8 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                     '<div>{{source.url}}</div>' +
                   '</div>' +
                   '<label for="control-chart-series">Series</label>' +
-                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Series Help" data-content="Add all of the columns you would like to plot in the chart, this is called a data series."><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
+                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" ' +
+                    'title="Series Help" data-content="Add all of the columns from your table from which you would like to plot the values. These will become the data series in your chart."><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
                   '<select title="Select a column whose values will be used as series" id="control-chart-series" multiple class="form-control chosen-select">' +
                     '{{#fields}}' +
                       '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
@@ -263,7 +264,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</div>' +
                 '<div class="form-group">' +
                   '<label for="control-chart-xfield">X-Field</label>' +
-                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Help" data-content="Enter the column title to use for the X-axis here."><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
+                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Help" data-content="Enter the column title to use for the horizontal (X) axis"><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
                   '<select id="control-chart-xfield" class="form-control chosen-select">' +
                     '{{#xfields}}' +
                       '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
