@@ -64,4 +64,4 @@ libraries:
     download:
       type: git
       url: 'https://github.com/NuCivic/recline.view.nvd3.js.git'
-      branch: 5984_commas_on_numbers
+      branch: master
