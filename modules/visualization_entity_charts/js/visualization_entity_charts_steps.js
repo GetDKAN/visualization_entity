@@ -253,6 +253,13 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                     '{{/fields}}' +
                   '</select>' +
                 '</div>' +
+                '<div class="form-group relative">' +
+                  '{{#yDataTypes}}' +
+                    '<label class="radio-inline">' +
+                      '<input type="radio" name="control-chart-y-data-type" id="control-chart-y-data-type-{{value}}" value="{{value}}" {{#selected}}checked {{/selected}}> {{name}}' +
+                    '</label>' +
+                  '{{/yDataTypes}}' +
+                '</div>' +
                 '<div class="form-group">' +
                   '<label for="control-chart-xfield">X-Field</label>' +
                   '<select id="control-chart-xfield" class="form-control chosen-select">' +
@@ -289,6 +296,9 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       self.state.set('fields', _.applyOption(
         _.arrayToOptions(_.getFields(self.state.get('model'))), self.state.get('seriesFields')
       ));
+      self.state.set('yDataTypes', _.applyOption(
+        _.arrayToOptions(dataTypes), [self.state.get('yDataType') || 'Auto']
+      ));
       self.state.set('xfields', _.applyOption(
         _.arrayToOptions(_.getFields(self.state.get('model'))), [self.state.get('xfield')]
       ));
@@ -302,6 +312,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     updateState: function(state, cb){
       var self = this;
       state.set('seriesFields', self.$('#control-chart-series').val());
+      state.set('yDataType', self.$('input[name=control-chart-y-data-type]:checked').val());
       state.set('xfield', self.$('#control-chart-xfield').val());
       state.set('xDataType', self.$('input[name=control-chart-x-data-type]:checked').val());
       cb(state);
