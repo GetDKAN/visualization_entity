@@ -21,7 +21,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
             </div> \
             <input aria-label="Search query" class="form-control search-query" type="text" name="q" value="{{q}}" placeholder="Search data ..."/> \
             <a class="help" tabindex="0" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" \
-            title="How to use the Query Editor" data-content="Some helpful stuff here."><i class="fa fa-question-circle" aria-hidden="true"></i></a> \
+            title="How to use the Query Editor" data-content="Add a query parameter to specify the data used for the chart."><i class="fa fa-question-circle" aria-hidden="true"></i></a> \
           </div> \
         </div> \
       </form> \
