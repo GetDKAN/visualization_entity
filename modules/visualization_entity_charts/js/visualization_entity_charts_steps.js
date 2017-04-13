@@ -256,11 +256,13 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
    * Data options view.
    */
   global.DataOptionsView = Backbone.View.extend({
-    template: '<div class="form-group">' +
+    template:   '<div class="form-group">' +
                   '<div class="form-group">' +
                     '<label>Source</label>' +
                     '<div>{{source.url}}</div>' +
                   '</div>' +
+                '</div>' +
+                '<div class="form-panel pad">' +
                   '<label for="control-chart-series">Series</label>' +
                   '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" ' +
                     'title="Series Help" data-content="Add all of the columns from your table from which you would like to plot the values. These will become the data series in your chart."><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>' +
@@ -269,31 +271,35 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                       '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
                     '{{/fields}}' +
                   '</select>' +
+                  '<div class="form-group relative">' +
+                    '<label>Y-Field Data Type</label>' +
+                    '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="Y-Field Data Type" data-content="You can specify the type of data used for the Y-Field(s) here if the auto-detect feature is not picking up the correct type."><i class="fa fa-question-circle-o" aria-hidden="true"></i></a><br>' +
+                    '{{#yDataTypes}}' +
+                      '<label class="radio-inline">' +
+                        '<input type="radio" name="control-chart-y-data-type" id="control-chart-y-data-type-{{value}}" value="{{value}}" {{#selected}}checked {{/selected}}> {{name}}' +
+                      '</label>' +
+                    '{{/yDataTypes}}' +
+                  '</div>' +
                 '</div>' +
-                '<div class="form-group relative">' +
-                  '{{#yDataTypes}}' +
-                    '<label class="radio-inline">' +
-                      '<input type="radio" name="control-chart-y-data-type" id="control-chart-y-data-type-{{value}}" value="{{value}}" {{#selected}}checked {{/selected}}> {{name}}' +
-                    '</label>' +
-                  '{{/yDataTypes}}' +
-                '</div>' +
-                '<div class="form-group">' +
-                  '<label for="control-chart-xfield">X-Field</label>' +
-                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Help" data-content="Enter the column title to use for the horizontal (X) axis"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>' +
-                  '<select id="control-chart-xfield" class="form-control chosen-select">' +
-                    '{{#xfields}}' +
-                      '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
-                    '{{/xfields}}' +
-                  '</select>' +
-                '</div>' +
-                '<div class="form-group relative">' +
-                  '<label>X-Field Data Type</label>' +
-                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Data Type" data-content="You can specify the type of data used for the X-Field here if the auto-detect feature is not picking up the correct type."><i class="fa fa-question-circle-o" aria-hidden="true"></i></a><br>' +
-                  '{{#xDataTypes}}' +
-                    '<label class="radio-inline">' +
-                      '<input type="radio" name="control-chart-x-data-type" id="control-chart-x-data-type-{{value}}" value="{{value}}" {{#selected}}checked {{/selected}}> {{name}}' +
-                    '</label>' +
-                  '{{/xDataTypes}}' +
+                '<div class="form-panel pad">' +
+                  '<div class="form-group">' +
+                    '<label for="control-chart-xfield">X-Field</label>' +
+                    '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Help" data-content="Enter the column title to use for the horizontal (X) axis"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>' +
+                    '<div class="form-group"><select id="control-chart-xfield" class="form-control chosen-select">' +
+                      '{{#xfields}}' +
+                        '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
+                      '{{/xfields}}' +
+                    '</select></div>' +
+                  '</div>' +
+                  '<div class="form-group relative">' +
+                    '<label>X-Field Data Type</label>' +
+                    '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Data Type" data-content="You can specify the type of data used for the X-Field here if the auto-detect feature is not picking up the correct type."><i class="fa fa-question-circle-o" aria-hidden="true"></i></a><br>' +
+                    '{{#xDataTypes}}' +
+                      '<label class="radio-inline">' +
+                        '<input type="radio" name="control-chart-x-data-type" id="control-chart-x-data-type-{{value}}" value="{{value}}" {{#selected}}checked {{/selected}}> {{name}}' +
+                      '</label>' +
+                    '{{/xDataTypes}}' +
+                  '</div>' +
                 '</div>' +
                 '<div id="controls">' +
                   '<button type="button" id="prev" class="btn btn-default pull-left">Back</button>' +

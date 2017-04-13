@@ -95,7 +95,9 @@ svg {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-
+.pad {
+  padding: 15px;
+}
 .form-panel .form-group:last-child{
   margin-bottom: 0px;
 }
@@ -114,6 +116,9 @@ svg {
 }
 #ve-chart-form input.form-control {
   margin: 4px 1em 0 0;
+}
+#control_chart_series_chosen {
+  margin-bottom: 1em;
 }
 
 #pager li.prev.action-pagination-update a {
@@ -229,6 +234,7 @@ svg {
 
 /* Help Pop-overs */
 .fa-question-circle-o:before {
+  font-family: 'FontAwesome';
   content: "\f29c";
 }
 .help {
