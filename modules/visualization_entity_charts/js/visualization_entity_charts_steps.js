@@ -255,7 +255,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                   '</div>' +
                   '<label for="control-chart-series">Series</label>' +
                   '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" ' +
-                    'title="Series Help" data-content="Add all of the columns from your table from which you would like to plot the values. These will become the data series in your chart."><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
+                    'title="Series Help" data-content="Add all of the columns from your table from which you would like to plot the values. These will become the data series in your chart."><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>' +
                   '<select title="Select a column whose values will be used as series" id="control-chart-series" multiple class="form-control chosen-select">' +
                     '{{#fields}}' +
                       '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
@@ -264,7 +264,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</div>' +
                 '<div class="form-group">' +
                   '<label for="control-chart-xfield">X-Field</label>' +
-                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Help" data-content="Enter the column title to use for the horizontal (X) axis"><i class="fa fa-question-circle" aria-hidden="true"></i></a>' +
+                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Help" data-content="Enter the column title to use for the horizontal (X) axis"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>' +
                   '<select id="control-chart-xfield" class="form-control chosen-select">' +
                     '{{#xfields}}' +
                       '<option value="{{value}}" {{#selected}} selected{{/selected}}>{{name}}</option>' +
@@ -273,7 +273,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</div>' +
                 '<div class="form-group relative">' +
                   '<label>X-Field Data Type</label>' +
-                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Data Type" data-content="You can specify the type of data used for the X-Field here if the auto-detect feature is not picking up the correct type."><i class="fa fa-question-circle" aria-hidden="true"></i></a><br>' +
+                  '<a class="help" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="X-Field Data Type" data-content="You can specify the type of data used for the X-Field here if the auto-detect feature is not picking up the correct type."><i class="fa fa-question-circle-o" aria-hidden="true"></i></a><br>' +
                   '{{#xDataTypes}}' +
                     '<label class="radio-inline">' +
                       '<input type="radio" name="control-chart-x-data-type" id="control-chart-x-data-type-{{value}}" value="{{value}}" {{#selected}}checked {{/selected}}> {{name}}' +

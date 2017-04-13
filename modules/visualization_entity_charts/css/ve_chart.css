@@ -106,6 +106,10 @@ svg {
   padding: 5px 12px;
   border-right: none;
   height: 34px;
+  margin: 4px 0;
+}
+#ve-chart-form input.form-control {
+  margin: 4px 1em 0 0;
 }
 
 #pager li.prev.action-pagination-update a {
@@ -212,6 +216,9 @@ svg {
 }
 
 /* Help Pop-overs */
+.fa-question-circle-o:before {
+  content: "\f29c";
+}
 .help {
   padding: 0 8px;
 }
@@ -220,6 +227,6 @@ svg {
   vertical-align: middle;
 }
 #filter-editor .help {
-  margin-bottom: 8px;
-  display: block;
+  display: inline;
+  vertical-align: middle;
 }

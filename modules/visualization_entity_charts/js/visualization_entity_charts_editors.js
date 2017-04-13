@@ -20,8 +20,9 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
               <button type="button" class="btn btn-default">Go &raquo;</button> \
             </div> \
             <input aria-label="Search query" class="form-control search-query" type="text" name="q" value="{{q}}" placeholder="Search data ..."/> \
-            <a class="help" tabindex="0" role="button" data-toggle="popover" data-placement="left" data-trigger="focus" \
-            title="How to use the Query Editor" data-content="Add a query parameter to specify the data used for the chart."><i class="fa fa-question-circle" aria-hidden="true"></i></a> \
+            <a class="help" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" \
+            title="How to use the Query Editor" data-content="Enter text to query the data. Returned rows will contain data matching your text \
+            (including partial text matches). Click on the Dataset tab to better see how the data is modified by your query."><i class="fa fa-question-circle-o" aria-hidden="true"></i></a> \
           </div> \
         </div> \
       </form> \
@@ -54,12 +55,6 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     className: 'recline-filter-editor well',
     template: ' \
       <div class="filters"> \
-        <a class="help" tabindex="0" role="button" data-toggle="popover" data-html="true" data-placement="left" data-trigger="focus" \
-        title="Create filters to narrow down the data." data-content="<p>To create a filter: Select a field, a filter type, \
-        and click the Add button. Select Value to filter by strings (labels), select Range to filter by numerical values, \
-        or select Geo distance to filter by geographical data.</p><p>Once your filter is created, you can adjust the values used in that filter.</p> \
-        <p>Multiple filters will be applied with the AND operator.</p> \
-        <p>To remove a filter, click on the trash can icon.</p>"><i class="fa fa-question-circle" aria-hidden="true"></i></a> \
         <div class="form-stacked js-add"> \
           <div class="form-group"> \
             <label>Field</label> \
@@ -78,6 +73,11 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
             </select> \
           </div> \
           <button id="add-filter-btn" type="button" class="btn btn-default">Add</button> \
+          <a class="help" tabindex="0" role="button" data-toggle="popover" data-html="true" data-trigger="focus" \
+          title="Create filters to narrow down the data." data-content="<p>To create a filter: Select a field, a filter type, and click the Add button. Select Value to filter by strings (labels), \
+          select Range to filter by numerical values, or select Geo distance to filter by geographical data. Value filters check for exact matches (no partial text matches; use the Query Editor instead \
+          if you need to search for partial text matches)</p><p>Once your filter is created, you can adjust the values used in that filter.</p> <p>Multiple filters will be applied with the AND operator \
+          (all criteria must be met for the data to be included in the chart).</p> <p>To remove a filter, click on the trash can icon.</p>"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a> \
         </div> \
         <div class="form-stacked js-edit"> \
           {{#filters}} \
