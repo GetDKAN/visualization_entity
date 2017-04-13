@@ -97,10 +97,11 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     render: function () {
       var self = this;
       var graphType = self.state.get('graphType');
+      var totalCount = self.state.get('model').recordCount || 0;
 
       self.listenTo(self.state.get('model').queryState, 'change', self.copyQueryState);
       self.$el.html(Mustache.render(self.template, self.state.toJSON()));
-      self.$el.find('.doc-count').text(self.model.recordCount || 'Unknown');
+      self.$el.find('.doc-count').text(totalCount);
       self.$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         self.graph.render();
       });
