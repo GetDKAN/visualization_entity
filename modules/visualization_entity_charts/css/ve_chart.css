@@ -33,6 +33,7 @@ svg {
 
 #ve-chart-form .pane-content{
   overflow: auto;
+  padding: 4px;
 }
 
 #ve-chart-form .stages li {
@@ -75,6 +76,9 @@ svg {
   margin-top: 0px;
   margin-bottom: 0px;
   position: relative;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .expander span {
@@ -124,6 +128,7 @@ svg {
 
 #pager li.page-range a {
   padding: 3px;
+  height: 35px;
 }
 
 #pager .pagination {
@@ -215,6 +220,13 @@ svg {
   border-radius: 0 0 4px 4px
 }
 
+.data-details { display: table; }
+.data-results { 
+  display: table-cell;
+  padding: 0 20px;
+  vertical-align: middle;
+}
+
 /* Help Pop-overs */
 .fa-question-circle-o:before {
   content: "\f29c";
@@ -228,5 +240,4 @@ svg {
 }
 #filter-editor .help {
   display: inline;
-  vertical-align: middle;
 }
