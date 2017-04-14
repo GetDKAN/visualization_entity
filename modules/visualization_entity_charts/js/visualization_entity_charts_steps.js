@@ -195,7 +195,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '</div>' +
                 '<div id="chart-selector">' +
                   '{{#graphTypes}}' +
-                    '<button type="button" class="{{value}} {{#selected}}selected{{/selected}}" data-selected="{{value}}"><span class="sr-only">{{value}}</span></button>' +
+                    '<button type="button" title="{{value}}" class="{{value}} {{#selected}}selected{{/selected}}" data-selected="{{value}}"><span class="sr-only">{{value}}</span></button>' +
                   '{{/graphTypes}}' +
                 '</ul>' +
               '</div>' +
