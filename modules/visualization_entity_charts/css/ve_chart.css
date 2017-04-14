@@ -50,7 +50,7 @@ svg {
 #chart-selector {
   width: 100%;
   overflow: auto;
-  padding: 0px;
+  padding: 0 0 15px;
 }
 #chart-selector button{
   height: 180px;
