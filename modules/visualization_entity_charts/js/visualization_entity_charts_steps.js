@@ -78,7 +78,8 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     events: {
       '#query-editor button': 'onEditorUpdate'
     },
-    initialize: function (options) {
+    initialize: function(options){
+      console.log('initialize');
       var self = this;
       self.options = _.defaults(options || {}, self.options);
       self.state = self.options.state;
@@ -97,11 +98,9 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     render: function () {
       var self = this;
       var graphType = self.state.get('graphType');
-      var totalCount = self.state.get('model').recordCount || 0;
-
       self.listenTo(self.state.get('model').queryState, 'change', self.copyQueryState);
       self.$el.html(Mustache.render(self.template, self.state.toJSON()));
-      self.$el.find('.doc-count').text(totalCount);
+      self.$el.find('.doc-count').text(self.state.get('model').recordCount || 'Unknown');
       self.$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         self.graph.render();
       });
@@ -395,8 +394,10 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
 
       state.set('source', source);
       var model = new recline.Model.Dataset(source);
-      state.set('model', model)
-      model.fetch().done(cb.bind(this, state)).fail(function (err) {
+      model.fetch().done(function(){
+        state.set('model', model);
+        cb(state);
+      }).fail(function (err) {
         console.log(err);
         alert('Failed to fetch the resource');
       });
