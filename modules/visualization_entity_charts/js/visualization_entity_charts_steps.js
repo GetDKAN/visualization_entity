@@ -78,7 +78,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     events: {
       '#query-editor button': 'onEditorUpdate'
     },
-    initialize: function(options){
+    initialize: function (options) {
       console.log('initialize');
       var self = this;
       self.options = _.defaults(options || {}, self.options);
@@ -348,7 +348,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
   });
 
   /**
-   * Load data view
+   * Load data view.
    *
    * Hiding Source Url field until further work can be done on it, it is useless at this point.
    */
@@ -394,7 +394,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
 
       state.set('source', source);
       var model = new recline.Model.Dataset(source);
-      model.fetch().done(function(){
+      model.fetch().done(function () {
         state.set('model', model);
         cb(state);
       }).fail(function (err) {
