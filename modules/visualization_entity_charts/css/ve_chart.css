@@ -10,6 +10,9 @@
 #chart-with-controls h4 {
   font-weight: normal;
 }
+#chart-with-controls.col-md-12 {
+  padding: 0;
+}
 #chart-with-controls .tab-content {
   overflow: hidden;
 }
