@@ -1,5 +1,6 @@
 7.x-1.x
 -------
+- Add help text to configuration fields in the chart entity form.
 - Added 'Data type' settings also for series values ('y' values).
 - Fixed parsing of 'Numeral' values on series.
 - Removed dataproxy as an option from the Select backend source type field on charts.
