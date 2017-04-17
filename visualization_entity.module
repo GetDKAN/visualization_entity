@@ -136,13 +136,22 @@ function visualization_entity_attach_embed_widget($markup, $element) {
  */
 function visualization_entity_iframe($entity) {
   if (!empty($entity)) {
-    header_remove('X-Frame-Options');
     $entity_view = entity_view('visualization', array($entity), 'full');
     $visualization = drupal_render($entity_view);
     return $visualization;
   }
   else {
     return MENU_NOT_FOUND;
+  }
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function visualization_entity_page_alter(&$page) {
+  $menu = menu_get_item();
+  if(!empty($menu) && isset($menu['path']) && $menu['path'] == 'visualization/%/%/iframe') {
+    header_remove('X-Frame-Options');
   }
 }
 
