@@ -444,7 +444,8 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     },
     updateStep: function(n){
       var self = this;
-      return function(state, success = true){
+      return function(state, success){
+        success = typeof success !== 'undefined' ? success : true;
         if (success) {
           self.state = state;
           self.gotoStep(n);
