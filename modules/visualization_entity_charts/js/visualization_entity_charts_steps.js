@@ -73,10 +73,11 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
               '</div>' +
               '<div class="col-md-12" id="controls">' +
                 '<button type="button" id="prev" class="btn btn-default pull-left">Back</button>' +
-                '<button type="submit" class="form-submit btn btn-success pull-right">Finish</button>' +
+                '<button type="submit" id="finish" class="form-submit btn btn-success pull-right">Finish</button>' +
               '</div>',
     events: {
-      '#query-editor button': 'onEditorUpdate'
+      '#query-editor button': 'onEditorUpdate',
+      'click #finish': 'finish'
     },
     initialize: function (options) {
       console.log('initialize');
@@ -90,8 +91,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
         name: 'chartOptions'
       };
     },
-    copyQueryState: function () {
-      console.log('copyQueryState');
+    copyQueryState: function(){
       var self = this;
       self.state.set('queryState', self.state.get('model').queryState.toJSON());
     },
@@ -172,12 +172,23 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     onEditorUpdate: function () {
       return false;
     },
-    updateState: function (state, cb) {
+    updateState: function(state, cb){
+      // TO CHECK: This never gets executed.
       cb(state);
     },
     assign: function (view, selector) {
       var self = this;
       view.setElement(self.$(selector)).render();
+    },
+    finish: function(event) {
+      var self = this;
+      if (!self.validate()) {
+        event.preventDefault();
+      }
+    },
+    validate: function() {
+      var self = this;
+      return self.controls.validate();
     },
   });
 
@@ -248,8 +259,12 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       var self = this;
       var type = self.getSelected();
       state.set('graphType', type);
-      cb(state);
-    }
+      var result = self.validate();
+      cb(state, result);
+    },
+    validate: function() {
+      return true;
+    },
   });
 
   /**
@@ -343,8 +358,12 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
       state.set('yDataType', self.$('input[name=control-chart-y-data-type]:checked').val());
       state.set('xfield', self.$('#control-chart-xfield').val());
       state.set('xDataType', self.$('input[name=control-chart-x-data-type]:checked').val());
-      cb(state);
-    }
+      var result = self.validate();
+      cb(state, result);
+    },
+    validate: function() {
+      return true;
+    },
   });
 
   /**
@@ -471,11 +490,14 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     },
     updateStep: function (n) {
       var self = this;
-      return function (state) {
-        self.state = state;
-        self.gotoStep(n);
-        self.trigger('multistep:change', {step:n});
-        self.$('.chosen-choices .search-field input, .chosen-search input').attr('aria-label', 'Choose some options');
+      return function(state, success){
+        success = typeof success !== 'undefined' ? success : true;
+        if (success) {
+          self.state = state;
+          self.gotoStep(n);
+          self.trigger('multistep:change', {step:n});
+          self.$('.chosen-choices .search-field input, .chosen-search input').attr('aria-label', 'Choose some options');
+        } 
       };
     },
     gotoStep: function (n) {
