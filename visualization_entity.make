@@ -64,4 +64,4 @@ libraries:
     download:
       type: git
       url: 'https://github.com/NuCivic/recline.view.nvd3.js.git'
-      branch: master
+      branch: civic-6637-fix-height-regression
