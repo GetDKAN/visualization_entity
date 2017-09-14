@@ -32,3 +32,7 @@ features_exclude[dependencies][visualization_entity_recline_field_reference] = v
 features_exclude[dependencies][visualization_entity_charts_dkan] = visualization_entity_charts_dkan
 features_exclude[field_instance][visualization-ve_chart-field_uuid_resource] = visualization-ve_chart-field_uuid_resource
 project path = profiles/dkan/modules/contrib
+
+; Information added by DKAN release script on 9/14/2017
+version = 7.x-1.3
+project = dkan
