@@ -2,5 +2,6 @@ site_name: Visualization Entity
 pages:
 - [index.md, Home]
 - [installation.md, Installation]
+- [create-a-chart-visualization.md, Create a chart visualization]
 - [create-a-choropleth-visualization.md, Create a choropleth visualization]
 - [create-a-geojson-visualization.md, Create a geojson visualization]
