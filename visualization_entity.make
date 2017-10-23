@@ -8,7 +8,7 @@ projects:
     subdir: contrib
     download:
       type: git
-      url: 'https://github.com/NuCivic/geo_file_entity.git'
+      url: 'https:///geo_file_entity.git'
       branch: master
     type: module
   uuidreference:
@@ -28,11 +28,11 @@ libraries:
   recline_choropleth:
     download:
       type: file
-      url: 'https://github.com/NuCivic/recline.view.choroplethmap.js/archive/master.zip'
+      url: 'https:///recline.view.choroplethmap.js/archive/master.zip'
   leaflet_zoomtogeometries:
     download:
       type: file
-      url: 'https://github.com/NuCivic/leaflet.map.zoomToGeometries.js/zipball/master'
+      url: 'https:///leaflet.map.zoomToGeometries.js/zipball/master'
   nvd3:
     download:
       type: git
@@ -51,7 +51,7 @@ libraries:
   lodash_data:
     download:
       type: git
-      url: 'https://github.com/NuCivic/lodash.data.git'
+      url: 'https:///lodash.data.git'
       branch: master
   spectrum:
     download:
@@ -63,5 +63,5 @@ libraries:
   reclineViewNvd3:
     download:
       type: git
-      url: 'https://github.com/NuCivic/recline.view.nvd3.js.git'
+      url: 'https:///recline.view.nvd3.js.git'
       branch: master
