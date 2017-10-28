@@ -4,3 +4,7 @@ package = Data Visualization
 core = 7.x
 
 dependencies[] = visualization_entity
+
+; Information added by DKAN release script on 10/28/2017
+version = 7.x-1.14-RC2
+project = dkan
