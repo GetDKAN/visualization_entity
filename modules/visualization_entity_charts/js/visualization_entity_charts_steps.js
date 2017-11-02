@@ -372,7 +372,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
    * Hiding Source Url field until further work can be done on it, it is useless at this point.
    */
   global.LoadDataView = Backbone.View.extend({
-    template: '<div class="form-group" style="display:none;">' +
+    template: '<div class="form-group" style="display:{{showSourceUrl}};">' +
                 '<label for="control-chart-source">Source Url</label>' +
                 ' <em>(Auto-populated if using DKAN.)</em>' +
                 '<input value="{{source.url}}" type="text" id="control-chart-source" class="form-control" />' +
@@ -381,18 +381,36 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
                 '<label for="control-chart-backend">Source Type</label>' +
                 ' <em>(Experimental : Backends other than DKAN are still a work in progress.)</em>' +
                 '<select title="Select backend source type" id="control-chart-backend" class="form-control">' +
-                  '<option value="csv">CSV</option>' +
-                  '<option value="gdocs">Google Spreadsheet</option>' +
+                  '{{#backendOptions}}' +
+                    '<label class="radio-inline">' +
+                      '<option value="{{value}}" {{selected}}>{{label}}</option>' +
+                    '</label>' +
+                  '{{/backendOptions}}' +
                 '</select>' +
               '</div>' +
               '<div id="controls">' +
                 '<button type="button" id="next" class="btn btn-primary pull-right">Next</button>' +
               '</div>',
+    events: {
+      'change #control-chart-backend': 'selectBackend'
+    },
+    selectBackend: function(e) {
+      var self = this;
+      var url = self.$('#control-chart-source').val();
+      var backend = self.$('#control-chart-backend').val();
+      var source = {
+        backend: backend,
+        url: url
+      };
+      self.state.set('source', source);
+      self.render();
+    },
     initialize: function (options) {
       var self = this;
       self.options = _.defaults(options || {}, self.options);
       self.state = self.options.state;
       self.model = self.options.model;
+      self.state.set('source', {backend: 'csv', source: ''});
       self.stepInfo = {
         title: 'Load Data',
         name: 'loadData'
@@ -400,7 +418,21 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
     },
     render: function () {
       var self = this;
-      self.$el.html(Mustache.render(self.template, self.state.toJSON()));
+      var source = self.state.get('source');
+      var tplData = {
+        backendOptions: [
+          {value: 'csv', label: 'CSV'},
+          {value: 'gdocs', label: 'Google Spreadsheet'},
+        ],
+        selected: function() {
+          return this.value === source.backend ? 'selected' : '';
+        },
+        showSourceUrl: function() {
+          return source.backend === 'gdocs' ? 'block' : 'none';
+        }
+      };
+      tplData = Object.assign(tplData, self.state.toJSON());
+      self.$el.html(Mustache.render(self.template, tplData));
     },
     updateState: function (state, cb) {
       var self = this;
@@ -497,7 +529,7 @@ this.recline.View.nvd3 = this.recline.View.nvd3 || {};
           self.gotoStep(n);
           self.trigger('multistep:change', {step:n});
           self.$('.chosen-choices .search-field input, .chosen-search input').attr('aria-label', 'Choose some options');
-        } 
+        }
       };
     },
     gotoStep: function (n) {
