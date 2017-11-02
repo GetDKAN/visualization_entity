@@ -11,3 +11,7 @@ dependencies[] = uuidreference_select
 features[features_api][] = api:2
 features[field_base][] = field_uuid_resource
 project path = profiles/dkan/modules/contrib
+
+; Information added by DKAN release script on 11/2/2017
+version = 7.x-1.14-RC3
+project = dkan
