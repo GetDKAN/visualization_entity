@@ -1,0 +1,85 @@
+{
+    "name": "getdkan/visualization_entity",
+    "description": "ECK-based entity for building NVD3 charts and other data visualizations",
+    "version": "2.x-dev",
+    "type": "drupal-module",
+    "minimum-stability": "dev",
+    "require": {
+        "composer/installers": "~1.0",
+        "drupal/eck": "2.0-rc9",
+        "drupal/uuidreference": "1.x-dev",
+        "library/recline_choropleth": "1.0",
+        "library/gdocs": "1.0",
+        "library/reclineViewNvd3": "1.0",
+        "fxp/composer-asset-plugin": "^1.4",
+        "bower-asset/chroma": "1.0",
+        "bower-asset/numeral": "1.x",
+        "novus/nvd3": "1.8.5",
+        "bower-asset/lodash.data": "^0.0.1@dev",
+        "bower-asset/spectrum": "^1.8@dev",
+        "bower-asset/leaflet-map-zoomToGeometries": "dev-no-bower-dependencies",
+        "getdkan/geo_file_entity": "dev-master"
+    },
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/7"
+        },
+        "libraries/recline_choropleth": {
+            "type": "package",
+            "package": {
+                "name": "library/recline_choropleth",
+                "version": "1.0",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/GetDKAN/recline.view.choroplethmap.js/archive/402c573a2254bc30cc10041a57be6ed93be590b9.zip",
+                    "type": "file"
+                }
+            }
+        },
+        "libraries/gdocs": {
+            "type": "package",
+            "package": {
+                "name": "library/gdocs",
+                "version": "1.0",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/okfn/recline.backend.gdocs.git",
+                    "type": "git",
+                    "reference": "e81bb237759353932834a38a0ec810441e0ada10"
+                }
+            }
+        },
+        "libraries/reclineViewNvd3": {
+            "type": "package",
+            "package": {
+                "name": "library/reclineViewNvd3",
+                "version": "1.0",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/GetDKAN/recline.view.nvd3.js.git",
+                    "type": "git",
+                    "reference": "7541d7b829e0a725be31790b6457d6068619c2e2"
+                }
+            }
+        }
+    },
+    "config": {
+        "fxp-asset": {
+            "repositories": {
+                "bower-asset/lodash.data": {
+                    "type": "bower-vcs",
+                    "url": "https://github.com/GetDKAN/lodash.data.git"
+                },
+                "bower-asset/recline.view.nvd3.js": {
+                    "type": "bower-vcs",
+                    "url": "https://github.com/GetDKAN/recline.view.nvd3.js.git"
+                },
+                "bower-asset/leaflet-map-zoomToGeometries": {
+                    "type": "bower-vcs",
+                    "url": "https://github.com/GetDKAN/leaflet.map.zoomToGeometries.js.git"
+                }
+            }
+        }
+    }
+}
