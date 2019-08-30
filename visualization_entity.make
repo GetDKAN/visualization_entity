@@ -3,7 +3,7 @@ core: 7.x
 api: '2'
 projects:
   eck:
-    version: 2.0-rc9
+    version: 2.0-rc10
     subdir: contrib
   geo_file_entity:
     subdir: contrib
